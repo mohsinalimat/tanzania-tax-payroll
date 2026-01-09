@@ -83,7 +83,8 @@ app_license = "mit"
 # ------------
 
 # before_install = "tanzania.install.before_install"
-# after_install = "tanzania.install.after_install"
+after_install = "tanzania.install.after_install"
+after_migrate = "tanzania.install.after_migrate"
 
 # Uninstallation
 # ------------
