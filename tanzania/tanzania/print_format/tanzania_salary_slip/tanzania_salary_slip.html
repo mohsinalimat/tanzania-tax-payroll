@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<style>
+		@media print {
+			body { margin: 0; }
+			.page-break { page-break-after: always; }
+		}
+
+		body {
+			font-family: 'Arial', 'Helvetica', sans-serif;
+			font-size: 11pt;
+			color: #333;
+			margin: 0;
+			padding: 20px;
+		}
+
+		.salary-slip-container {
+			max-width: 800px;
+			margin: 0 auto;
+			border: 2px solid #333;
+			padding: 20px;
+			background-color: white;
+		}
+
+		.header {
+			text-align: center;
+			border-bottom: 3px solid #333;
+			padding-bottom: 15px;
+			margin-bottom: 20px;
+		}
+
+		.company-name {
+			font-size: 20pt;
+			font-weight: bold;
+			color: #1a1a1a;
+			margin-bottom: 5px;
+		}
+
+		.company-details {
+			font-size: 9pt;
+			color: #666;
+			margin-top: 5px;
+		}
+
+		.slip-title {
+			font-size: 16pt;
+			font-weight: bold;
+			text-transform: uppercase;
+			margin-top: 10px;
+			color: #2c5282;
+		}
+
+		.employee-info {
+			margin: 20px 0;
+			border: 1px solid #ddd;
+			padding: 15px;
+			background-color: #f8f9fa;
+		}
+
+		.info-row {
+			display: flex;
+			margin-bottom: 8px;
+		}
+
+		.info-label {
+			font-weight: bold;
+			width: 180px;
+			color: #555;
+		}
+
+		.info-value {
+			flex: 1;
+			color: #333;
+		}
+
+		.salary-details {
+			margin: 20px 0;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-bottom: 15px;
+		}
+
+		table th {
+			background-color: #2c5282;
+			color: white;
+			padding: 10px;
+			text-align: left;
+			font-weight: bold;
+			border: 1px solid #1a3a5a;
+		}
+
+		table td {
+			padding: 8px 10px;
+			border: 1px solid #ddd;
+		}
+
+		table tbody tr:nth-child(even) {
+			background-color: #f8f9fa;
+		}
+
+		table tbody tr:hover {
+			background-color: #e9ecef;
+		}
+
+		.amount-col {
+			text-align: right;
+			font-weight: 500;
+		}
+
+		.totals-section {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 20px;
+			gap: 20px;
+		}
+
+		.total-box {
+			flex: 1;
+			border: 2px solid #333;
+			padding: 15px;
+			text-align: center;
+		}
+
+		.total-box.net-pay {
+			background-color: #d4edda;
+			border-color: #28a745;
+		}
+
+		.total-label {
+			font-size: 10pt;
+			color: #666;
+			margin-bottom: 5px;
+			text-transform: uppercase;
+		}
+
+		.total-amount {
+			font-size: 18pt;
+			font-weight: bold;
+			color: #1a1a1a;
+		}
+
+		.employer-contributions {
+			margin-top: 20px;
+			border: 1px solid #ddd;
+			padding: 15px;
+			background-color: #fff9e6;
+		}
+
+		.section-title {
+			font-weight: bold;
+			font-size: 12pt;
+			margin-bottom: 10px;
+			color: #2c5282;
+			border-bottom: 2px solid #2c5282;
+			padding-bottom: 5px;
+		}
+
+		.ytd-section {
+			margin-top: 20px;
+			border: 1px solid #ddd;
+			padding: 15px;
+			background-color: #e8f4f8;
+		}
+
+		.footer {
+			margin-top: 30px;
+			padding-top: 15px;
+			border-top: 2px solid #333;
+			font-size: 9pt;
+			color: #666;
+			text-align: center;
+		}
+
+		.payment-info {
+			margin: 20px 0;
+			padding: 15px;
+			border: 1px solid #ddd;
+			background-color: #f0f8ff;
+		}
+
+		.confidential {
+			color: #d9534f;
+			font-weight: bold;
+			text-align: center;
+			margin-top: 10px;
+			font-size: 10pt;
+		}
+	</style>
+</head>
+<body>
+	<div class="salary-slip-container">
+		<!-- Header Section -->
+		<div class="header">
+			<div class="company-name">{{ doc.company }}</div>
+			<div class="company-details">
+				{% set company_doc = frappe.get_doc("Company", doc.company) %}
+				{{ company_doc.address or "" }}<br>
+				{% if company_doc.tax_id %}TIN: {{ company_doc.tax_id }}<br>{% endif %}
+				{% if company_doc.get("vrn") %}VRN: {{ company_doc.vrn }}<br>{% endif %}
+				Email: {{ company_doc.email or "" }} | Phone: {{ company_doc.phone_no or "" }}
+			</div>
+			<div class="slip-title">Salary Slip</div>
+			<div style="margin-top: 10px; font-size: 10pt;">
+				<strong>Period:</strong> {{ frappe.format(doc.start_date, {"fieldtype": "Date"}) }}
+				to {{ frappe.format(doc.end_date, {"fieldtype": "Date"}) }}
+			</div>
+		</div>
+
+		<!-- Employee Information -->
+		<div class="employee-info">
+			{% set employee = frappe.get_doc("Employee", doc.employee) %}
+			<div class="info-row">
+				<div class="info-label">Employee ID:</div>
+				<div class="info-value">{{ doc.employee }}</div>
+			</div>
+			<div class="info-row">
+				<div class="info-label">Employee Name:</div>
+				<div class="info-value">{{ doc.employee_name }}</div>
+			</div>
+			<div class="info-row">
+				<div class="info-label">Designation:</div>
+				<div class="info-value">{{ doc.designation or "-" }}</div>
+			</div>
+			<div class="info-row">
+				<div class="info-label">Department:</div>
+				<div class="info-value">{{ doc.department or "-" }}</div>
+			</div>
+			<div class="info-row">
+				<div class="info-label">Date of Joining:</div>
+				<div class="info-value">{{ frappe.format(employee.date_of_joining, {"fieldtype": "Date"}) if employee.date_of_joining else "-" }}</div>
+			</div>
+			<div class="info-row">
+				<div class="info-label">Bank Account:</div>
+				<div class="info-value">{{ doc.bank_account_no or "-" }}</div>
+			</div>
+		</div>
+
+		<!-- Earnings Section -->
+		<div class="salary-details">
+			<div class="section-title">Earnings</div>
+			<table>
+				<thead>
+					<tr>
+						<th style="width: 60%;">Component</th>
+						<th style="width: 40%;" class="amount-col">Amount (TZS)</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for earning in doc.earnings %}
+					<tr>
+						<td>{{ earning.salary_component }}</td>
+						<td class="amount-col">{{ frappe.format(earning.amount, {"fieldtype": "Currency"}) }}</td>
+					</tr>
+					{% endfor %}
+					<tr style="background-color: #e9ecef; font-weight: bold;">
+						<td>Total Earnings</td>
+						<td class="amount-col">{{ frappe.format(doc.gross_pay, {"fieldtype": "Currency"}) }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Deductions Section -->
+		<div class="salary-details">
+			<div class="section-title">Deductions</div>
+			<table>
+				<thead>
+					<tr>
+						<th style="width: 60%;">Component</th>
+						<th style="width: 40%;" class="amount-col">Amount (TZS)</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for deduction in doc.deductions %}
+					<tr>
+						<td>{{ deduction.salary_component }}</td>
+						<td class="amount-col">{{ frappe.format(deduction.amount, {"fieldtype": "Currency"}) }}</td>
+					</tr>
+					{% endfor %}
+					<tr style="background-color: #e9ecef; font-weight: bold;">
+						<td>Total Deductions</td>
+						<td class="amount-col">{{ frappe.format(doc.total_deduction, {"fieldtype": "Currency"}) }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Totals Section -->
+		<div class="totals-section">
+			<div class="total-box">
+				<div class="total-label">Gross Pay</div>
+				<div class="total-amount">{{ frappe.format(doc.gross_pay, {"fieldtype": "Currency"}) }}</div>
+			</div>
+			<div class="total-box">
+				<div class="total-label">Total Deductions</div>
+				<div class="total-amount">{{ frappe.format(doc.total_deduction, {"fieldtype": "Currency"}) }}</div>
+			</div>
+			<div class="total-box net-pay">
+				<div class="total-label">Net Pay</div>
+				<div class="total-amount">{{ frappe.format(doc.net_pay, {"fieldtype": "Currency"}) }}</div>
+			</div>
+		</div>
+
+		<!-- Employer Contributions (Informational) -->
+		<div class="employer-contributions">
+			<div class="section-title">Employer Contributions (Informational)</div>
+			<table>
+				<thead>
+					<tr>
+						<th style="width: 60%;">Contribution Type</th>
+						<th style="width: 40%;" class="amount-col">Amount (TZS)</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% set nssf_employer = doc.gross_pay * 0.10 if doc.gross_pay else 0 %}
+					{% set wcf_employer = doc.gross_pay * 0.005 if doc.gross_pay else 0 %}
+					{% set sdl_employer = doc.gross_pay * 0.035 if doc.gross_pay else 0 %}
+
+					<tr>
+						<td>NSSF Employer Contribution (10%)</td>
+						<td class="amount-col">{{ frappe.format(nssf_employer, {"fieldtype": "Currency"}) }}</td>
+					</tr>
+					<tr>
+						<td>WCF Employer Contribution (0.5%)</td>
+						<td class="amount-col">{{ frappe.format(wcf_employer, {"fieldtype": "Currency"}) }}</td>
+					</tr>
+					<tr>
+						<td>SDL Employer Contribution (3.5%)</td>
+						<td class="amount-col">{{ frappe.format(sdl_employer, {"fieldtype": "Currency"}) }}</td>
+					</tr>
+					<tr style="background-color: #e9ecef; font-weight: bold;">
+						<td>Total Employer Contributions</td>
+						<td class="amount-col">{{ frappe.format(nssf_employer + wcf_employer + sdl_employer, {"fieldtype": "Currency"}) }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<p style="font-size: 9pt; margin-top: 10px; color: #666;">
+				<em>Note: Employer contributions are paid by the company and do not affect your net pay.</em>
+			</p>
+		</div>
+
+		<!-- Year-to-Date Totals -->
+		<div class="ytd-section">
+			<div class="section-title">Year-to-Date Summary ({{ doc.fiscal_year or "Current Year" }})</div>
+			{% set ytd_data = get_ytd_totals(doc.employee, doc.start_date) %}
+			<table>
+				<thead>
+					<tr>
+						<th style="width: 60%;">Description</th>
+						<th style="width: 40%;" class="amount-col">YTD Total (TZS)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Gross Earnings</td>
+						<td class="amount-col">{{ frappe.format(ytd_data.get("gross_pay", 0), {"fieldtype": "Currency"}) }}</td>
+					</tr>
+					<tr>
+						<td>Total Deductions</td>
+						<td class="amount-col">{{ frappe.format(ytd_data.get("total_deduction", 0), {"fieldtype": "Currency"}) }}</td>
+					</tr>
+					<tr>
+						<td>PAYE Tax Paid</td>
+						<td class="amount-col">{{ frappe.format(ytd_data.get("paye", 0), {"fieldtype": "Currency"}) }}</td>
+					</tr>
+					<tr>
+						<td>NSSF Contributions</td>
+						<td class="amount-col">{{ frappe.format(ytd_data.get("nssf", 0), {"fieldtype": "Currency"}) }}</td>
+					</tr>
+					<tr style="background-color: #e9ecef; font-weight: bold;">
+						<td>Net Pay YTD</td>
+						<td class="amount-col">{{ frappe.format(ytd_data.get("net_pay", 0), {"fieldtype": "Currency"}) }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Payment Information -->
+		<div class="payment-info">
+			<div class="section-title">Payment Details</div>
+			<div class="info-row">
+				<div class="info-label">Payment Date:</div>
+				<div class="info-value">{{ frappe.format(doc.posting_date, {"fieldtype": "Date"}) if doc.posting_date else "-" }}</div>
+			</div>
+			<div class="info-row">
+				<div class="info-label">Payment Method:</div>
+				<div class="info-value">{{ doc.mode_of_payment or "Bank Transfer" }}</div>
+			</div>
+			{% if doc.bank_name %}
+			<div class="info-row">
+				<div class="info-label">Bank:</div>
+				<div class="info-value">{{ doc.bank_name }}</div>
+			</div>
+			{% endif %}
+			{% if doc.bank_account_no %}
+			<div class="info-row">
+				<div class="info-label">Account Number:</div>
+				<div class="info-value">{{ doc.bank_account_no }}</div>
+			</div>
+			{% endif %}
+		</div>
+
+		<!-- Footer -->
+		<div class="footer">
+			<p>This is a computer-generated document. No signature is required.</p>
+			<p>Generated on: {{ frappe.format(frappe.utils.now(), {"fieldtype": "Datetime"}) }}</p>
+			<div class="confidential">
+				CONFIDENTIAL - For the addressee only
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// Python function to get YTD totals
+		{% macro get_ytd_totals(employee, as_of_date) %}
+		{%- set ytd = frappe.db.sql("""
+			SELECT
+				SUM(gross_pay) as gross_pay,
+				SUM(total_deduction) as total_deduction,
+				SUM(net_pay) as net_pay
+			FROM `tabSalary Slip`
+			WHERE employee = %s
+				AND start_date >= DATE_FORMAT(%s, '%%Y-01-01')
+				AND start_date <= %s
+				AND docstatus = 1
+		""", (employee, as_of_date, as_of_date), as_dict=1) -%}
+
+		{%- set paye_ytd = frappe.db.sql("""
+			SELECT SUM(sd.amount) as paye
+			FROM `tabSalary Detail` sd
+			INNER JOIN `tabSalary Slip` ss ON sd.parent = ss.name
+			WHERE ss.employee = %s
+				AND ss.start_date >= DATE_FORMAT(%s, '%%Y-01-01')
+				AND ss.start_date <= %s
+				AND ss.docstatus = 1
+				AND sd.salary_component = 'PAYE'
+		""", (employee, as_of_date, as_of_date), as_dict=1) -%}
+
+		{%- set nssf_ytd = frappe.db.sql("""
+			SELECT SUM(sd.amount) as nssf
+			FROM `tabSalary Detail` sd
+			INNER JOIN `tabSalary Slip` ss ON sd.parent = ss.name
+			WHERE ss.employee = %s
+				AND ss.start_date >= DATE_FORMAT(%s, '%%Y-01-01')
+				AND ss.start_date <= %s
+				AND ss.docstatus = 1
+				AND sd.salary_component = 'NSSF'
+		""", (employee, as_of_date, as_of_date), as_dict=1) -%}
+
+		{{- {
+			"gross_pay": ytd[0].gross_pay if ytd else 0,
+			"total_deduction": ytd[0].total_deduction if ytd else 0,
+			"net_pay": ytd[0].net_pay if ytd else 0,
+			"paye": paye_ytd[0].paye if paye_ytd else 0,
+			"nssf": nssf_ytd[0].nssf if nssf_ytd else 0
+		} -}}
+		{%- endmacro %}
+	</script>
+</body>
+</html>
