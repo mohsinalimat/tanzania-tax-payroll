@@ -91,11 +91,11 @@ def get_data(filters):
 			ss.gross_pay,
 			ss.posting_date,
 			e.date_of_joining,
-			e.custom_nssf
+			e.nssf
 		FROM `tabSalary Slip` ss
 		INNER JOIN `tabEmployee` e ON ss.employee = e.name
 		WHERE ss.docstatus = 1
-			AND e.custom_nssf = 1
+			AND e.nssf = 1
 			{conditions}
 		ORDER BY ss.employee, ss.posting_date
 	""", filters, as_dict=1)

@@ -33,7 +33,7 @@ frappe.query_reports["NSSF Contribution Report"] = {
 			"get_query": function() {
 				return {
 					"filters": {
-						"custom_nssf": 1
+						"nssf": 1
 					}
 				};
 			}

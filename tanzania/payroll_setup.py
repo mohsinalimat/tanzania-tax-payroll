@@ -413,7 +413,7 @@ def create_salary_components(company_name, company_abbr):
 			"is_tax_applicable": 0,
 			"depends_on_payment_days": 0,
 			"do_not_include_in_total": 1,
-			"condition": "custom_nssf == 1",
+			"condition": "nssf == 1",
 			"formula": "(base+IA_1)*0.1",
 			"amount_based_on_formula": 1,
 			"accounts": [
@@ -431,7 +431,7 @@ def create_salary_components(company_name, company_abbr):
 			"is_tax_applicable": 0,
 			"depends_on_payment_days": 0,
 			"do_not_include_in_total": 1,
-			"condition": "custom_pssf == 1",
+			"condition": "pssf == 1",
 			"formula": "(base+IA_1)*0.15",
 			"amount_based_on_formula": 1,
 			"accounts": [
@@ -484,7 +484,7 @@ def create_salary_components(company_name, company_abbr):
 			"type": "Deduction",
 			"is_tax_applicable": 0,
 			"depends_on_payment_days": 0,
-			"condition": "custom_nssf == 1",
+			"condition": "nssf == 1",
 			"formula": "(base+IA_1)*0.1",
 			"amount_based_on_formula": 1,
 			"accounts": [
@@ -502,7 +502,7 @@ def create_salary_components(company_name, company_abbr):
 			"is_tax_applicable": 0,
 			"depends_on_payment_days": 0,
 			"do_not_include_in_total": 1,
-			"condition": "custom_nssf == 1",
+			"condition": "nssf == 1",
 			"formula": "(base+IA_1)*0.1",
 			"amount_based_on_formula": 1,
 			"accounts": [
@@ -519,7 +519,7 @@ def create_salary_components(company_name, company_abbr):
 			"type": "Deduction",
 			"is_tax_applicable": 0,
 			"depends_on_payment_days": 0,
-			"condition": "custom_pssf == 1",
+			"condition": "pssf == 1",
 			"formula": "(base+IA_1)*0.05",
 			"amount_based_on_formula": 1,
 			"accounts": [
@@ -537,7 +537,7 @@ def create_salary_components(company_name, company_abbr):
 			"is_tax_applicable": 0,
 			"depends_on_payment_days": 0,
 			"do_not_include_in_total": 1,
-			"condition": "custom_pssf == 1",
+			"condition": "pssf == 1",
 			"formula": "(base+IA_1)*0.15",
 			"amount_based_on_formula": 1,
 			"accounts": [
@@ -605,7 +605,7 @@ def create_salary_components(company_name, company_abbr):
 			"type": "Deduction",
 			"is_tax_applicable": 0,
 			"depends_on_payment_days": 0,
-			"condition": "custom_heslb == 1",
+			"condition": "heslb == 1",
 			"formula": "(base+IA_1)*0.15",
 			"amount_based_on_formula": 1,
 			"accounts": [
@@ -726,8 +726,8 @@ def create_default_salary_structure(company_name, company_abbr):
 		{"salary_component": "Basic", "abbr": "B", "formula": "base", "amount_based_on_formula": 1, "depends_on_payment_days": 1},
 		{"salary_component": "Allowance", "abbr": "IA_1", "amount_based_on_formula": 0},
 		{"salary_component": "Transport Allowance", "abbr": "TrAll", "amount_based_on_formula": 0, "depends_on_payment_days": 1},
-		{"salary_component": "NSSF Expense", "abbr": "NSSFe", "formula": "(base+IA_1)*0.1", "amount_based_on_formula": 1, "do_not_include_in_total": 1, "condition": "custom_nssf == 1"},
-		{"salary_component": "PSSF Expense", "abbr": "PSSFe", "formula": "(base+IA_1)*0.15", "amount_based_on_formula": 1, "do_not_include_in_total": 1, "condition": "custom_pssf == 1"},
+		{"salary_component": "NSSF Expense", "abbr": "NSSFe", "formula": "(base+IA_1)*0.1", "amount_based_on_formula": 1, "do_not_include_in_total": 1, "condition": "nssf == 1"},
+		{"salary_component": "PSSF Expense", "abbr": "PSSFe", "formula": "(base+IA_1)*0.15", "amount_based_on_formula": 1, "do_not_include_in_total": 1, "condition": "pssf == 1"},
 		{"salary_component": "SDL Expense", "abbr": "SDLe", "formula": "(base+IA_1)*0.035", "amount_based_on_formula": 1, "do_not_include_in_total": 1},
 		{"salary_component": "WCF Expense", "abbr": "WCFe", "formula": "(base+IA_1)*0.005", "amount_based_on_formula": 1, "do_not_include_in_total": 1},
 	]
@@ -746,10 +746,10 @@ def create_default_salary_structure(company_name, company_abbr):
 
 	# Add deductions (NSSF, PAYE tiers, SDL, WCF, etc.)
 	deductions = [
-		{"salary_component": "NSSF", "abbr": "NSSFemp", "formula": "(base+IA_1)*0.1", "amount_based_on_formula": 1, "condition": "custom_nssf == 1"},
-		{"salary_component": "NSSF Employer", "abbr": "NSSFempl", "formula": "(base+IA_1)*0.1", "amount_based_on_formula": 1, "do_not_include_in_total": 1, "condition": "custom_nssf == 1"},
-		{"salary_component": "PSSF", "abbr": "PSSFemp", "formula": "(base+IA_1)*0.05", "amount_based_on_formula": 1, "condition": "custom_pssf == 1"},
-		{"salary_component": "PSSF Employer", "abbr": "PSSFempl", "formula": "(base+IA_1)*0.15", "amount_based_on_formula": 1, "do_not_include_in_total": 1, "condition": "custom_pssf == 1"},
+		{"salary_component": "NSSF", "abbr": "NSSFemp", "formula": "(base+IA_1)*0.1", "amount_based_on_formula": 1, "condition": "nssf == 1"},
+		{"salary_component": "NSSF Employer", "abbr": "NSSFempl", "formula": "(base+IA_1)*0.1", "amount_based_on_formula": 1, "do_not_include_in_total": 1, "condition": "nssf == 1"},
+		{"salary_component": "PSSF", "abbr": "PSSFemp", "formula": "(base+IA_1)*0.05", "amount_based_on_formula": 1, "condition": "pssf == 1"},
+		{"salary_component": "PSSF Employer", "abbr": "PSSFempl", "formula": "(base+IA_1)*0.15", "amount_based_on_formula": 1, "do_not_include_in_total": 1, "condition": "pssf == 1"},
 		{"salary_component": "WCF", "abbr": "WCF", "formula": "(base+IA_1)*0.005", "amount_based_on_formula": 1, "do_not_include_in_total": 1},
 		{"salary_component": "SDL", "abbr": "SDL", "formula": "(base+IA_1)*0.035", "amount_based_on_formula": 1, "do_not_include_in_total": 1},
 		# PAYE Tiers
@@ -759,7 +759,7 @@ def create_default_salary_structure(company_name, company_abbr):
 		{"salary_component": "PAYE- (Tax)", "abbr": "PAYE", "formula": "((((base+IA_1)- NSSFemp) - 1000000) * 0.3) + 128000", "amount_based_on_formula": 1, "depends_on_payment_days": 1, "condition": "(((base+IA_1) - NSSFemp) >= 1000000)"},
 		{"salary_component": "PAYE- (Tax)", "abbr": "PAYE", "formula": "((base+IA_1) - NSSFemp) * 0.3", "amount_based_on_formula": 1, "depends_on_payment_days": 1, "condition": "employment_type == 'Secondary'"},
 		# Other deductions
-		{"salary_component": "HESLB", "abbr": "HESLB", "formula": "(base+IA_1) * 0.15", "amount_based_on_formula": 1, "condition": "custom_heslb == 1"},
+		{"salary_component": "HESLB", "abbr": "HESLB", "formula": "(base+IA_1) * 0.15", "amount_based_on_formula": 1, "condition": "heslb == 1"},
 		{"salary_component": "Salary Advance", "abbr": "SLADV", "amount_based_on_formula": 0, "do_not_include_in_total": 1, "depends_on_payment_days": 1},
 		{"salary_component": "Loan", "abbr": "Ln", "amount_based_on_formula": 0, "depends_on_payment_days": 1},
 		{"salary_component": "Employee Deduction", "abbr": "ED", "amount_based_on_formula": 0, "depends_on_payment_days": 1},
