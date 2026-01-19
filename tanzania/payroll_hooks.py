@@ -7,21 +7,35 @@ import frappe
 from frappe import _
 
 
-# Mapping of payable accounts to their respective statutory suppliers
-STATUTORY_ACCOUNT_PARTY_MAP = {
-	"PAYE Payable": "Tanzania Revenue Authority (TRA)",
-	"SDL Payable": "Tanzania Revenue Authority (TRA)",
-	"NSSF Payable": "National Social Security Fund (NSSF)",
-	"WCF Payable": "Workers Compensation Fund (WCF)",
-	"HESLB Payable": "Higher Education Students Loans Board (HESLB)",
-}
+# Statutory payable accounts that need Party assignment
+STATUTORY_PAYABLE_ACCOUNTS = [
+	"PAYE Payable",
+	"SDL Payable",
+	"NSSF Payable",
+	"WCF Payable",
+	"HESLB Payable",
+	"PSSF Payable",
+]
 
 
 def before_submit_journal_entry(doc, method):
 	"""Add party information to statutory payable accounts in Journal Entry"""
+	assign_party_to_statutory_accounts(doc)
+
+
+def validate_journal_entry(doc, method):
+	"""Validate and auto-fill party for statutory payable accounts"""
+	assign_party_to_statutory_accounts(doc)
+
+
+def assign_party_to_statutory_accounts(doc):
+	"""Assign Employee as Party for statutory payable accounts in payroll JEs"""
 	if not doc.accounts:
 		return
 
+	# Try to get employee from the JE context (payroll accrual entries)
+	employee = get_employee_from_journal_entry(doc)
+	
 	for row in doc.accounts:
 		if not row.account:
 			continue
@@ -29,37 +43,46 @@ def before_submit_journal_entry(doc, method):
 		# Check if this is a statutory payable account
 		account_name = row.account.split(" - ")[0] if " - " in row.account else row.account
 
-		if account_name in STATUTORY_ACCOUNT_PARTY_MAP:
+		if account_name in STATUTORY_PAYABLE_ACCOUNTS:
 			# Only set party if not already set
 			if not row.party_type and not row.party:
-				supplier_name = STATUTORY_ACCOUNT_PARTY_MAP[account_name]
+				# Check if this row has a reference to a salary slip
+				row_employee = None
+				if row.reference_type == "Salary Slip" and row.reference_name:
+					row_employee = frappe.db.get_value("Salary Slip", row.reference_name, "employee")
+				
+				# Use row-specific employee or fallback to JE-level employee
+				party_employee = row_employee or employee
+				
+				if party_employee and frappe.db.exists("Employee", party_employee):
+					row.party_type = "Employee"
+					row.party = party_employee
 
-				# Verify supplier exists
-				if frappe.db.exists("Supplier", supplier_name):
-					row.party_type = "Supplier"
-					row.party = supplier_name
 
-
-def validate_journal_entry(doc, method):
-	"""Validate and auto-fill party for statutory payable accounts"""
-	if not doc.accounts:
-		return
-
+def get_employee_from_journal_entry(doc):
+	"""Try to extract employee from Journal Entry context"""
+	# Method 1: Check if there's a salary slip reference in any row
 	for row in doc.accounts:
-		if not row.account:
-			continue
+		if row.reference_type == "Salary Slip" and row.reference_name:
+			employee = frappe.db.get_value("Salary Slip", row.reference_name, "employee")
+			if employee:
+				return employee
+	
+	# Method 2: If JE is from Payroll Entry, try to get employee
+	# (This works when there's only one employee in the payroll)
+	if doc.voucher_type == "Journal Entry" and "salaries" in (doc.user_remark or "").lower():
+		# Try to find employee from linked documents
+		salary_slips = frappe.get_all(
+			"Salary Slip",
+			filters={
+				"journal_entry": doc.name,
+				"docstatus": 1
+			},
+			pluck="employee",
+			limit=1
+		)
+		if salary_slips:
+			return salary_slips[0]
+	
+	return None
 
-		# Get account type
-		account_type = frappe.db.get_value("Account", row.account, "account_type")
-
-		if account_type == "Payable" and not row.party_type:
-			# Check if this is a statutory payable account
-			account_name = row.account.split(" - ")[0] if " - " in row.account else row.account
-
-			if account_name in STATUTORY_ACCOUNT_PARTY_MAP:
-				supplier_name = STATUTORY_ACCOUNT_PARTY_MAP[account_name]
-
-				# Verify supplier exists
-				if frappe.db.exists("Supplier", supplier_name):
-					row.party_type = "Supplier"
-					row.party = supplier_name
