@@ -1,2 +1,2 @@
-# Copyright (c) 2024, Navari Limited and contributors
+# Copyright (c) 2026, Nelson Mpanju and contributors
 # For license information, please see license.txt
