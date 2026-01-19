@@ -1,0 +1,287 @@
+{
+	"actions": [],
+	"allow_rename": 0,
+	"creation": "2025-01-19 12:00:00.000000",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"company",
+		"enabled",
+		"column_break_1",
+		"environment",
+		"provider_section",
+		"provider",
+		"column_break_provider",
+		"api_key",
+		"device_section",
+		"serial_number",
+		"device_serial",
+		"column_break_device",
+		"tin",
+		"vrn",
+		"registration_section",
+		"registration_id",
+		"registration_date",
+		"column_break_reg",
+		"expiry_date",
+		"gc_counter",
+		"settings_section",
+		"auto_submit",
+		"show_preview",
+		"column_break_settings",
+		"retry_failed",
+		"max_retries",
+		"company_info_section",
+		"company_name",
+		"address",
+		"column_break_company",
+		"city",
+		"region",
+		"tax_office",
+		"response_section",
+		"last_response"
+	],
+	"fields": [
+		{
+			"fieldname": "company",
+			"fieldtype": "Link",
+			"in_list_view": 1,
+			"label": "Company",
+			"options": "Company",
+			"reqd": 1,
+			"unique": 1
+		},
+		{
+			"default": "1",
+			"fieldname": "enabled",
+			"fieldtype": "Check",
+			"label": "Enabled"
+		},
+		{
+			"fieldname": "column_break_1",
+			"fieldtype": "Column Break"
+		},
+		{
+			"default": "Sandbox",
+			"fieldname": "environment",
+			"fieldtype": "Select",
+			"label": "Environment",
+			"options": "Sandbox\nProduction",
+			"reqd": 1
+		},
+		{
+			"fieldname": "provider_section",
+			"fieldtype": "Section Break",
+			"label": "Provider Configuration"
+		},
+		{
+			"default": "VFDPlus",
+			"fieldname": "provider",
+			"fieldtype": "Select",
+			"in_list_view": 1,
+			"label": "EFD Provider",
+			"options": "VFDPlus\nTotalVFD\nSimplifyVFD",
+			"reqd": 1
+		},
+		{
+			"fieldname": "column_break_provider",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "api_key",
+			"fieldtype": "Password",
+			"label": "API Key"
+		},
+		{
+			"fieldname": "device_section",
+			"fieldtype": "Section Break",
+			"label": "Device Information"
+		},
+		{
+			"fieldname": "serial_number",
+			"fieldtype": "Data",
+			"label": "Serial Number"
+		},
+		{
+			"fieldname": "device_serial",
+			"fieldtype": "Data",
+			"label": "Device Serial",
+			"read_only": 1
+		},
+		{
+			"fieldname": "column_break_device",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "tin",
+			"fieldtype": "Data",
+			"label": "TIN",
+			"read_only": 1
+		},
+		{
+			"fieldname": "vrn",
+			"fieldtype": "Data",
+			"label": "VRN",
+			"read_only": 1
+		},
+		{
+			"fieldname": "registration_section",
+			"fieldtype": "Section Break",
+			"label": "Registration"
+		},
+		{
+			"fieldname": "registration_id",
+			"fieldtype": "Data",
+			"label": "Registration ID",
+			"read_only": 1
+		},
+		{
+			"fieldname": "registration_date",
+			"fieldtype": "Date",
+			"label": "Registration Date",
+			"read_only": 1
+		},
+		{
+			"fieldname": "column_break_reg",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "expiry_date",
+			"fieldtype": "Date",
+			"label": "Expiry Date",
+			"read_only": 1
+		},
+		{
+			"fieldname": "gc_counter",
+			"fieldtype": "Int",
+			"label": "GC Counter",
+			"read_only": 1
+		},
+		{
+			"fieldname": "settings_section",
+			"fieldtype": "Section Break",
+			"label": "Settings"
+		},
+		{
+			"default": "1",
+			"fieldname": "auto_submit",
+			"fieldtype": "Check",
+			"label": "Auto Submit on Invoice"
+		},
+		{
+			"default": "1",
+			"fieldname": "show_preview",
+			"fieldtype": "Check",
+			"label": "Show Preview Before Submission"
+		},
+		{
+			"fieldname": "column_break_settings",
+			"fieldtype": "Column Break"
+		},
+		{
+			"default": "1",
+			"fieldname": "retry_failed",
+			"fieldtype": "Check",
+			"label": "Auto Retry Failed"
+		},
+		{
+			"default": "3",
+			"fieldname": "max_retries",
+			"fieldtype": "Int",
+			"label": "Max Retries"
+		},
+		{
+			"collapsible": 1,
+			"fieldname": "company_info_section",
+			"fieldtype": "Section Break",
+			"label": "Company Info (from TRA)"
+		},
+		{
+			"fieldname": "company_name",
+			"fieldtype": "Data",
+			"label": "Company Name",
+			"read_only": 1
+		},
+		{
+			"fieldname": "address",
+			"fieldtype": "Data",
+			"label": "Address",
+			"read_only": 1
+		},
+		{
+			"fieldname": "column_break_company",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "city",
+			"fieldtype": "Data",
+			"label": "City",
+			"read_only": 1
+		},
+		{
+			"fieldname": "region",
+			"fieldtype": "Data",
+			"label": "Region",
+			"read_only": 1
+		},
+		{
+			"fieldname": "tax_office",
+			"fieldtype": "Data",
+			"label": "Tax Office",
+			"read_only": 1
+		},
+		{
+			"collapsible": 1,
+			"fieldname": "response_section",
+			"fieldtype": "Section Break",
+			"label": "Last API Response"
+		},
+		{
+			"fieldname": "last_response",
+			"fieldtype": "Code",
+			"label": "Last Response",
+			"options": "JSON",
+			"read_only": 1
+		}
+	],
+	"index_web_pages_for_search": 1,
+	"issingle": 0,
+	"links": [],
+	"modified": "2025-01-19 12:00:00.000000",
+	"modified_by": "Administrator",
+	"module": "Tanzania",
+	"name": "EFD Settings",
+	"naming_rule": "Expression",
+	"autoname": "field:company",
+	"owner": "Administrator",
+	"permissions": [
+		{
+			"create": 1,
+			"delete": 1,
+			"email": 1,
+			"export": 1,
+			"print": 1,
+			"read": 1,
+			"report": 1,
+			"role": "System Manager",
+			"share": 1,
+			"write": 1
+		},
+		{
+			"create": 1,
+			"email": 1,
+			"export": 1,
+			"print": 1,
+			"read": 1,
+			"report": 1,
+			"role": "Accounts Manager",
+			"share": 1,
+			"write": 1
+		}
+	],
+	"sort_field": "company",
+	"sort_order": "ASC",
+	"states": [],
+	"title_field": "company",
+	"track_changes": 1
+}

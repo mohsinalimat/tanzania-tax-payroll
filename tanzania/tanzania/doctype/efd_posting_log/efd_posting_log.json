@@ -1,0 +1,203 @@
+{
+	"actions": [],
+	"allow_rename": 0,
+	"creation": "2025-01-19 12:00:00.000000",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"sales_invoice",
+		"company",
+		"column_break_1",
+		"status",
+		"posting_date",
+		"posting_time",
+		"receipt_section",
+		"receipt_number",
+		"verification_code",
+		"column_break_receipt",
+		"verification_url",
+		"gc_counter",
+		"dc_counter",
+		"response_section",
+		"response_code",
+		"response_message",
+		"column_break_response",
+		"retry_count",
+		"request_section",
+		"request_payload",
+		"response_data"
+	],
+	"fields": [
+		{
+			"fieldname": "sales_invoice",
+			"fieldtype": "Link",
+			"in_list_view": 1,
+			"in_standard_filter": 1,
+			"label": "Sales Invoice",
+			"options": "Sales Invoice",
+			"read_only": 1,
+			"reqd": 1
+		},
+		{
+			"fieldname": "company",
+			"fieldtype": "Link",
+			"in_standard_filter": 1,
+			"label": "Company",
+			"options": "Company",
+			"read_only": 1
+		},
+		{
+			"fieldname": "column_break_1",
+			"fieldtype": "Column Break"
+		},
+		{
+			"default": "Pending",
+			"fieldname": "status",
+			"fieldtype": "Select",
+			"in_list_view": 1,
+			"in_standard_filter": 1,
+			"label": "Status",
+			"options": "Pending\nSuccess\nFailed",
+			"read_only": 1
+		},
+		{
+			"fieldname": "posting_date",
+			"fieldtype": "Date",
+			"in_list_view": 1,
+			"label": "Posting Date",
+			"read_only": 1
+		},
+		{
+			"fieldname": "posting_time",
+			"fieldtype": "Time",
+			"label": "Posting Time",
+			"read_only": 1
+		},
+		{
+			"fieldname": "receipt_section",
+			"fieldtype": "Section Break",
+			"label": "Receipt Information"
+		},
+		{
+			"fieldname": "receipt_number",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Receipt Number",
+			"read_only": 1
+		},
+		{
+			"fieldname": "verification_code",
+			"fieldtype": "Data",
+			"label": "Verification Code",
+			"read_only": 1
+		},
+		{
+			"fieldname": "column_break_receipt",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "verification_url",
+			"fieldtype": "Data",
+			"label": "Verification URL",
+			"read_only": 1
+		},
+		{
+			"fieldname": "gc_counter",
+			"fieldtype": "Int",
+			"label": "GC Counter",
+			"read_only": 1
+		},
+		{
+			"fieldname": "dc_counter",
+			"fieldtype": "Int",
+			"label": "DC Counter",
+			"read_only": 1
+		},
+		{
+			"fieldname": "response_section",
+			"fieldtype": "Section Break",
+			"label": "Response"
+		},
+		{
+			"fieldname": "response_code",
+			"fieldtype": "Data",
+			"label": "Response Code",
+			"read_only": 1
+		},
+		{
+			"fieldname": "response_message",
+			"fieldtype": "Small Text",
+			"label": "Response Message",
+			"read_only": 1
+		},
+		{
+			"fieldname": "column_break_response",
+			"fieldtype": "Column Break"
+		},
+		{
+			"default": "0",
+			"fieldname": "retry_count",
+			"fieldtype": "Int",
+			"label": "Retry Count",
+			"read_only": 1
+		},
+		{
+			"collapsible": 1,
+			"fieldname": "request_section",
+			"fieldtype": "Section Break",
+			"label": "Request/Response Data"
+		},
+		{
+			"fieldname": "request_payload",
+			"fieldtype": "Code",
+			"label": "Request Payload",
+			"options": "JSON",
+			"read_only": 1
+		},
+		{
+			"fieldname": "response_data",
+			"fieldtype": "Code",
+			"label": "Response Data",
+			"options": "JSON",
+			"read_only": 1
+		}
+	],
+	"index_web_pages_for_search": 1,
+	"issingle": 0,
+	"links": [],
+	"modified": "2025-01-19 12:00:00.000000",
+	"modified_by": "Administrator",
+	"module": "Tanzania",
+	"name": "EFD Posting Log",
+	"naming_rule": "Expression",
+	"autoname": "EFD-.YY.-.#####",
+	"owner": "Administrator",
+	"permissions": [
+		{
+			"email": 1,
+			"export": 1,
+			"print": 1,
+			"read": 1,
+			"report": 1,
+			"role": "System Manager",
+			"share": 1
+		},
+		{
+			"email": 1,
+			"export": 1,
+			"print": 1,
+			"read": 1,
+			"report": 1,
+			"role": "Accounts Manager",
+			"share": 1
+		},
+		{
+			"read": 1,
+			"role": "Accounts User"
+		}
+	],
+	"sort_field": "creation",
+	"sort_order": "DESC",
+	"states": [],
+	"track_changes": 1
+}
