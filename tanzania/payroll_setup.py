@@ -158,10 +158,12 @@ def create_payroll_liability_accounts(company_name, company_abbr):
 		{
 			"account_name": "Payroll Payable",
 			"parent_account": "Salaries and Wages Payable",
+			"account_type": "Payable",
 		},
 		{
 			"account_name": "HESLB Payable",
 			"parent_account": "Salaries and Wages Payable",
+			"account_type": "Payable",
 		},
 	]
 
@@ -184,7 +186,7 @@ def create_payroll_liability_accounts(company_name, company_abbr):
 			"parent_account": parent_account,
 			"is_group": 0,
 			"root_type": "Liability",
-			"account_type": "Payable",
+			"account_type": account_data.get("account_type", "Payable"),
 			"report_type": "Balance Sheet",
 		})
 
@@ -248,7 +250,6 @@ def ensure_salaries_payable_group(company_name, company_abbr):
 				"parent_account": liability_root,
 				"is_group": 1,
 				"root_type": "Liability",
-				"account_type": "Payable",
 				"report_type": "Balance Sheet",
 			}).insert(ignore_permissions=True, ignore_if_duplicate=True)
 
@@ -259,7 +260,6 @@ def ensure_salaries_payable_group(company_name, company_abbr):
 			"parent_account": current_liabilities,
 			"is_group": 1,
 			"root_type": "Liability",
-			"account_type": "Payable",
 			"report_type": "Balance Sheet",
 		}).insert(ignore_permissions=True, ignore_if_duplicate=True)
 

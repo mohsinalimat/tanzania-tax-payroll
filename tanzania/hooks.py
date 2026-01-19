@@ -138,13 +138,12 @@ after_migrate = "tanzania.install.after_migrate"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Journal Entry": {
+		"validate": "tanzania.payroll_hooks.validate_journal_entry",
+		"before_submit": "tanzania.payroll_hooks.before_submit_journal_entry",
+	}
+}
 
 # Scheduled Tasks
 # ---------------

@@ -245,7 +245,7 @@ def get_exempt_sales(company, from_date, to_date):
 
 
 def get_local_purchases(company, from_date, to_date, vat_account):
-	"""Get local purchases with VAT"""
+	"""Get all purchases with VAT (local and imports combined)"""
 	result = frappe.db.sql("""
 		SELECT
 			COALESCE(SUM(pi.net_total), 0) as taxable_amount,
@@ -257,28 +257,16 @@ def get_local_purchases(company, from_date, to_date, vat_account):
 			AND pi.docstatus = 1
 			AND pi.posting_date BETWEEN %s AND %s
 			AND ptc.rate = 18
-			AND (pi.is_import = 0 OR pi.is_import IS NULL)
 	""", (vat_account, company, from_date, to_date), as_dict=1)
 
 	return result[0] if result else {"taxable_amount": 0, "vat_amount": 0}
 
 
 def get_imports(company, from_date, to_date, vat_account):
-	"""Get import purchases with VAT"""
-	result = frappe.db.sql("""
-		SELECT
-			COALESCE(SUM(pi.net_total), 0) as taxable_amount,
-			COALESCE(SUM(ptc.tax_amount), 0) as vat_amount
-		FROM `tabPurchase Invoice` pi
-		LEFT JOIN `tabPurchase Taxes and Charges` ptc ON ptc.parent = pi.name
-			AND ptc.account_head = %s
-		WHERE pi.company = %s
-			AND pi.docstatus = 1
-			AND pi.posting_date BETWEEN %s AND %s
-			AND pi.is_import = 1
-	""", (vat_account, company, from_date, to_date), as_dict=1)
-
-	return result[0] if result else {"taxable_amount": 0, "vat_amount": 0}
+	"""Get import purchases with VAT - returns 0 as imports are included in local purchases"""
+	# Note: is_import field doesn't exist in standard ERPNext
+	# All purchases are combined in get_local_purchases
+	return {"taxable_amount": 0, "vat_amount": 0}
 
 
 def get_zero_rated_purchases(company, from_date, to_date):
