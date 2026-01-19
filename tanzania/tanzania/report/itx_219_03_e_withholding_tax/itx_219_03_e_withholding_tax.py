@@ -108,7 +108,7 @@ def get_data(filters):
 		INNER JOIN `tabPurchase Taxes and Charges` pitc ON pitc.parent = pi.name
 		LEFT JOIN `tabSupplier` s ON pi.supplier = s.name
 		WHERE pi.docstatus = 1
-			AND pitc.account_head LIKE %s
+			AND pitc.account_head LIKE %(wht_account)s
 			AND pitc.tax_amount != 0
 			{conditions}
 		ORDER BY pi.posting_date, pi.name
