@@ -43,7 +43,9 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {
+	"Sales Invoice": "public/js/sales_invoice_efd.js"
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -142,11 +144,23 @@ doc_events = {
 	"Journal Entry": {
 		"before_validate": "tanzania.payroll_hooks.validate_journal_entry",
 		"before_submit": "tanzania.payroll_hooks.before_submit_journal_entry",
+	},
+	"Sales Invoice": {
+		"on_submit": "tanzania.efd.utils.auto_submit_efd",
+		"before_cancel": "tanzania.efd.utils.validate_efd_cancel",
 	}
 }
 
 # Scheduled Tasks
 # ---------------
+
+scheduler_events = {
+	"cron": {
+		"*/15 * * * *": [
+			"tanzania.efd.utils.retry_failed_efd_submissions"
+		],
+	}
+}
 
 # scheduler_events = {
 # 	"all": [
