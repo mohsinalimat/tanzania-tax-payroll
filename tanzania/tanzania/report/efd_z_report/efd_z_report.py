@@ -114,12 +114,11 @@ def get_data(filters):
 			SUM(si.grand_total) as gross_sales,
 			SUM(si.total_taxes_and_charges) as total_tax,
 			SUM(si.net_total) as net_sales,
-			SUM(CASE WHEN mop.efd_payment_type = 'CASH' THEN si.grand_total ELSE 0 END) as cash_amount,
-			SUM(CASE WHEN mop.efd_payment_type = 'CCARD' THEN si.grand_total ELSE 0 END) as card_amount,
-			SUM(CASE WHEN mop.efd_payment_type = 'EMONEY' THEN si.grand_total ELSE 0 END) as mobile_amount,
-			SUM(CASE WHEN mop.efd_payment_type = 'INVOICE' THEN si.grand_total ELSE 0 END) as credit_amount
+			SUM(CASE WHEN si.is_pos = 1 THEN si.grand_total ELSE 0 END) as cash_amount,
+			SUM(CASE WHEN si.is_pos = 0 AND si.outstanding_amount = 0 THEN si.grand_total ELSE 0 END) as card_amount,
+			0 as mobile_amount,
+			SUM(CASE WHEN si.outstanding_amount > 0 THEN si.grand_total ELSE 0 END) as credit_amount
 		FROM `tabSales Invoice` si
-		LEFT JOIN `tabMode of Payment` mop ON si.mode_of_payment = mop.name
 		WHERE si.docstatus = 1
 			AND si.efd_status = 'Success'
 			{conditions}

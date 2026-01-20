@@ -104,11 +104,14 @@ def get_data(filters):
 			si.net_total,
 			si.total_taxes_and_charges as tax_amount,
 			si.grand_total,
-			COALESCE(mop.efd_payment_type, 'CASH') as payment_type,
+			CASE
+				WHEN si.is_pos = 1 THEN 'CASH'
+				WHEN si.outstanding_amount > 0 THEN 'INVOICE'
+				ELSE 'CASH'
+			END as payment_type,
 			si.efd_status,
 			si.efd_verification_url as verification_url
 		FROM `tabSales Invoice` si
-		LEFT JOIN `tabMode of Payment` mop ON si.mode_of_payment = mop.name
 		WHERE si.docstatus = 1
 			{conditions}
 		ORDER BY si.posting_date DESC, si.posting_time DESC

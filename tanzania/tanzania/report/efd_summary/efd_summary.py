@@ -75,17 +75,24 @@ def get_data(filters):
 	elif group_by == "Payment Type":
 		data = frappe.db.sql("""
 			SELECT
-				COALESCE(mop.efd_payment_type, 'CASH') as group_field,
+				CASE
+					WHEN si.is_pos = 1 THEN 'CASH'
+					WHEN si.outstanding_amount > 0 THEN 'INVOICE'
+					ELSE 'CASH'
+				END as group_field,
 				COUNT(*) as count,
 				SUM(si.net_total) as net_total,
 				SUM(si.total_taxes_and_charges) as tax_amount,
 				SUM(si.grand_total) as grand_total
 			FROM `tabSales Invoice` si
-			LEFT JOIN `tabMode of Payment` mop ON si.mode_of_payment = mop.name
 			WHERE si.docstatus = 1
 				AND si.efd_status = 'Success'
 				{conditions}
-			GROUP BY COALESCE(mop.efd_payment_type, 'CASH')
+			GROUP BY CASE
+				WHEN si.is_pos = 1 THEN 'CASH'
+				WHEN si.outstanding_amount > 0 THEN 'INVOICE'
+				ELSE 'CASH'
+			END
 			ORDER BY grand_total DESC
 		""".format(conditions=conditions), filters, as_dict=1)
 
