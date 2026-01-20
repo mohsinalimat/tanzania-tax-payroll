@@ -134,8 +134,15 @@ def update_existing_template(doctype, template_name, template_config, cost_cente
 	try:
 		template_doc = frappe.get_doc(doctype, template_name)
 
-		# Remove all existing tax rows
-		template_doc.taxes = []
+		# Remove all existing tax rows using SQL for reliability
+		child_table = "Sales Taxes and Charges" if "Sales" in doctype else "Purchase Taxes and Charges"
+		frappe.db.sql("""
+			DELETE FROM `tab{child_table}`
+			WHERE parent = %s AND parenttype = %s
+		""".format(child_table=child_table), (template_name, doctype))
+
+		# Reload doc after SQL delete
+		template_doc.reload()
 
 		# Add fresh rows from config (no duplicates)
 		for tax in template_config["taxes"]:
@@ -534,10 +541,15 @@ def create_sales_tax_templates(company_name, company_abbr):
 		template_name = template["title"]
 		template_name_with_abbr = f"{template_name} - {company_abbr}"
 
-		# Check if template exists
+		# Check if template exists - ALWAYS update to ensure no duplicates
 		if frappe.db.exists("Sales Taxes and Charges Template", {"title": template_name_with_abbr, "company": company_name}):
 			# Update existing template - remove duplicates
 			update_existing_template("Sales Taxes and Charges Template", template_name_with_abbr, template, cost_center)
+			continue
+
+		# Also check without abbr (ERPNext auto-adds abbr on save)
+		if frappe.db.exists("Sales Taxes and Charges Template", {"title": template_name, "company": company_name}):
+			update_existing_template("Sales Taxes and Charges Template", f"{template_name} - {company_abbr}", template, cost_center)
 			continue
 
 		template_doc = frappe.get_doc({
@@ -607,10 +619,15 @@ def create_purchase_tax_templates(company_name, company_abbr):
 		template_name = template["title"]
 		template_name_with_abbr = f"{template_name} - {company_abbr}"
 
-		# Check if template exists
+		# Check if template exists - ALWAYS update to ensure no duplicates
 		if frappe.db.exists("Purchase Taxes and Charges Template", {"title": template_name_with_abbr, "company": company_name}):
 			# Update existing template - remove duplicates
 			update_existing_template("Purchase Taxes and Charges Template", template_name_with_abbr, template, cost_center)
+			continue
+
+		# Also check without abbr (ERPNext auto-adds abbr on save)
+		if frappe.db.exists("Purchase Taxes and Charges Template", {"title": template_name, "company": company_name}):
+			update_existing_template("Purchase Taxes and Charges Template", f"{template_name} - {company_abbr}", template, cost_center)
 			continue
 
 		template_doc = frappe.get_doc({
