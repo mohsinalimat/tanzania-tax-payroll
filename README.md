@@ -1,19 +1,20 @@
 # Tanzania Tax & Payroll Compliance
 
-ERPNext app for Tanzania tax and payroll automation.
+ERPNext app for Tanzania tax, payroll, and EFD automation.
 
 ## Features
 
 **Tax**: VAT 18%, Withholding Tax, PAYE brackets
 **Payroll**: NSSF 20%, PSSF 20%, SDL 3.5%, WCF 0.5%, HESLB 15%
-**Reports**: VAT Return, WHT (ITX.219.03.E), PAYE/SDL, NSSF/WCF, Payroll Cost Analysis
+**EFD**: Multi-provider support (VFDPlus, TotalVFD, SimplifyVFD)
+**Reports**: VAT Return, WHT, PAYE/SDL, NSSF/WCF, EFD Z-Report, Daily Sales
 
 ## Installation
 
 ```bash
 bench get-app tanzania https://github.com/nelsonmpanju/tanzania.git
 bench --site your-site install-app tanzania
-bench --site your-site migrate
+bench migrate
 ```
 
 ## Auto Setup
@@ -23,6 +24,24 @@ On install creates:
 - Payroll accounts (NSSF, SDL, WCF, HESLB)
 - Statutory suppliers (TRA, NSSF, WCF, HESLB, PSSF)
 - Salary components & structure
+
+## EFD Integration (Optional)
+
+EFD is **optional** - works without configuration. To enable:
+
+1. Create **EFD Settings** for your company
+2. Select provider (VFDPlus, TotalVFD, SimplifyVFD)
+3. Enter API credentials
+4. Enable auto-submit (optional)
+
+**Features**:
+- Auto/manual receipt submission
+- Preview before sending
+- Failed submission retry
+- Receipt verification URL
+- Posting audit log
+
+**Tax Codes**: A=18%, B=Special, C=Zero, D=Relief, E=Exempt
 
 ## PAYE Brackets (Monthly)
 
