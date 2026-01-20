@@ -24,7 +24,7 @@ def get_tanzania_custom_fields():
 				"label": _("NSSF Registered"),
 				"description": _("Employee is registered with NSSF (National Social Security Fund)"),
 				"insert_after": "tanzania_payroll_section",
-				"default": 0,
+				"default": "0",
 			},
 			{
 				"fieldname": "pssf",
@@ -32,7 +32,7 @@ def get_tanzania_custom_fields():
 				"label": _("PSSF Registered"),
 				"description": _("Employee is registered with PSSF (Public Service Social Security Fund)"),
 				"insert_after": "nssf",
-				"default": 0,
+				"default": "0",
 			},
 			{
 				"fieldname": "column_break_payroll",
@@ -45,7 +45,7 @@ def get_tanzania_custom_fields():
 				"label": _("HESLB Loan"),
 				"description": _("Employee has HESLB (Higher Education Students Loans Board) loan - 15% deduction"),
 				"insert_after": "column_break_payroll",
-				"default": 0,
+				"default": "0",
 			},
 			{
 				"fieldname": "heslb_loan_number",
@@ -294,7 +294,7 @@ def get_tanzania_custom_fields():
 				"fieldtype": "Check",
 				"label": _("Auto Submit EFD"),
 				"description": _("Automatically submit to TRA on invoice submit"),
-				"default": 1,
+				"default": "1",
 				"insert_after": "skip_efd",
 			},
 			{
