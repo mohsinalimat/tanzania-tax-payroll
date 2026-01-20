@@ -1,6 +1,6 @@
 {
 	"charts": [],
-	"content": "[{\"id\":\"hero\",\"type\":\"hero\",\"data\":{\"title\":\"Tanzania Tax & Payroll\",\"subtitle\":\"Complete tax compliance, payroll automation, and EFD integration for Tanzania\"}}]",
+	"content": "[{\"id\":\"hero\",\"type\":\"hero\",\"data\":{\"title\":\"Tanzania Tax and Payroll\",\"subtitle\":\"Complete tax compliance, payroll automation, and EFD integration for Tanzania\"}}]",
 	"creation": "2025-01-20 12:00:00.000000",
 	"custom_blocks": [],
 	"docstatus": 0,
@@ -622,5 +622,5 @@
 			"type": "Report"
 		}
 	],
-	"title": "Tanzania Tax & Payroll"
+	"title": "Tanzania"
 }
