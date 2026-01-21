@@ -1,626 +1,384 @@
 {
-	"charts": [],
-	"content": "[{\"id\":\"hero\",\"type\":\"hero\",\"data\":{\"title\":\"Tanzania Tax and Payroll\",\"subtitle\":\"Complete tax compliance, payroll automation, and EFD integration for Tanzania\"}}]",
-	"creation": "2025-01-20 12:00:00.000000",
-	"custom_blocks": [],
-	"docstatus": 0,
-	"doctype": "Workspace",
-	"for_user": "",
-	"hide_custom": 0,
-	"icon": "accounting",
-	"idx": 0,
-	"is_hidden": 0,
-	"label": "Tanzania",
-	"links": [
-		{
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "EFD Integration",
-			"link_count": 0,
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Card Break"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "EFD Settings",
-			"link_count": 0,
-			"link_to": "EFD Settings",
-			"link_type": "DocType",
-			"onboard": 1,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "EFD Posting Log",
-			"link_count": 0,
-			"link_to": "EFD Posting Log",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "EFD Z-Report",
-			"link_count": 0,
-			"link_to": "EFD Z-Report",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "EFD Daily Sales",
-			"link_count": 0,
-			"link_to": "EFD Daily Sales",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "EFD Summary",
-			"link_count": 0,
-			"link_to": "EFD Summary",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Tax Setup",
-			"link_count": 0,
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Card Break"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Company",
-			"link_count": 0,
-			"link_to": "Company",
-			"link_type": "DocType",
-			"onboard": 1,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Account",
-			"link_count": 0,
-			"link_to": "Account",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Tax Category",
-			"link_count": 0,
-			"link_to": "Tax Category",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Sales Taxes and Charges Template",
-			"link_count": 0,
-			"link_to": "Sales Taxes and Charges Template",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Purchase Taxes and Charges Template",
-			"link_count": 0,
-			"link_to": "Purchase Taxes and Charges Template",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Item Tax Template",
-			"link_count": 0,
-			"link_to": "Item Tax Template",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Tax Withholding Category",
-			"link_count": 0,
-			"link_to": "Tax Withholding Category",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Tax Reports",
-			"link_count": 0,
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Card Break"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "VAT Return Report",
-			"link_count": 0,
-			"link_to": "VAT Return Report",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "VAT E-Filing Return",
-			"link_count": 0,
-			"link_to": "VAT EFiling Return",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "Input VAT Return",
-			"link_count": 0,
-			"link_to": "Input VAT Return",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "VAT Summary Report",
-			"link_count": 0,
-			"link_to": "VAT Summary Report",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "Withholding Tax Report",
-			"link_count": 0,
-			"link_to": "Withholding Tax Report",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "ITX.219.03.E WHT",
-			"link_count": 0,
-			"link_to": "ITX.219.03.E Withholding Tax",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "Tax Compliance Summary",
-			"link_count": 0,
-			"link_to": "Tax Compliance Summary",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Sales & Purchase",
-			"link_count": 0,
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Card Break"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Customer",
-			"link_count": 0,
-			"link_to": "Customer",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Supplier",
-			"link_count": 0,
-			"link_to": "Supplier",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Sales Invoice",
-			"link_count": 0,
-			"link_to": "Sales Invoice",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Purchase Invoice",
-			"link_count": 0,
-			"link_to": "Purchase Invoice",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Journal Entry",
-			"link_count": 0,
-			"link_to": "Journal Entry",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Mode of Payment",
-			"link_count": 0,
-			"link_to": "Mode of Payment",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Payroll Setup",
-			"link_count": 0,
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Card Break"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Employee",
-			"link_count": 0,
-			"link_to": "Employee",
-			"link_type": "DocType",
-			"onboard": 1,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Salary Component",
-			"link_count": 0,
-			"link_to": "Salary Component",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Salary Structure",
-			"link_count": 0,
-			"link_to": "Salary Structure",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Salary Structure Assignment",
-			"link_count": 0,
-			"link_to": "Salary Structure Assignment",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Payroll Entry",
-			"link_count": 0,
-			"link_to": "Payroll Entry",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Salary Slip",
-			"link_count": 0,
-			"link_to": "Salary Slip",
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Payroll Reports",
-			"link_count": 0,
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Card Break"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "PAYE and SDL Report",
-			"link_count": 0,
-			"link_to": "PAYE and SDL Report",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "NSSF Contribution Report",
-			"link_count": 0,
-			"link_to": "NSSF Contribution Report",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "WCF Contribution Report",
-			"link_count": 0,
-			"link_to": "WCF Contribution Report",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "HESLB Return",
-			"link_count": 0,
-			"link_to": "HESLB Return",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "Monthly Payroll Summary",
-			"link_count": 0,
-			"link_to": "Monthly Payroll Summary",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "Payroll Cost Analysis",
-			"link_count": 0,
-			"link_to": "Payroll Cost Analysis",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "Statutory Payment Tracking",
-			"link_count": 0,
-			"link_to": "Statutory Payment Tracking",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		},
-		{
-			"hidden": 0,
-			"is_query_report": 0,
-			"label": "Dashboards",
-			"link_count": 0,
-			"link_type": "DocType",
-			"onboard": 0,
-			"type": "Card Break"
-		},
-		{
-			"dependencies": "",
-			"hidden": 0,
-			"is_query_report": 1,
-			"label": "CEO Dashboard",
-			"link_count": 0,
-			"link_to": "CEO Dashboard",
-			"link_type": "Report",
-			"onboard": 0,
-			"type": "Link"
-		}
-	],
-	"modified": "2025-01-20 12:00:00.000000",
-	"modified_by": "Administrator",
-	"module": "Tanzania",
-	"name": "Tanzania",
-	"number_cards": [],
-	"owner": "Administrator",
-	"parent_page": "",
-	"public": 1,
-	"restrict_to_domain": "",
-	"roles": [],
-	"sequence_id": 1,
-	"shortcuts": [
-		{
-			"color": "Blue",
-			"doc_view": "List",
-			"label": "EFD Settings",
-			"link_to": "EFD Settings",
-			"stats_filter": "",
-			"type": "DocType"
-		},
-		{
-			"color": "Grey",
-			"doc_view": "List",
-			"label": "EFD Posting Log",
-			"link_to": "EFD Posting Log",
-			"stats_filter": "",
-			"type": "DocType"
-		},
-		{
-			"color": "Green",
-			"doc_view": "",
-			"label": "EFD Z-Report",
-			"link_to": "EFD Z-Report",
-			"stats_filter": "",
-			"type": "Report"
-		},
-		{
-			"color": "Orange",
-			"doc_view": "List",
-			"label": "Sales Tax Templates",
-			"link_to": "Sales Taxes and Charges Template",
-			"stats_filter": "",
-			"type": "DocType"
-		},
-		{
-			"color": "Orange",
-			"doc_view": "List",
-			"label": "Purchase Tax Templates",
-			"link_to": "Purchase Taxes and Charges Template",
-			"stats_filter": "",
-			"type": "DocType"
-		},
-		{
-			"color": "Yellow",
-			"doc_view": "List",
-			"label": "Item Tax Templates",
-			"link_to": "Item Tax Template",
-			"stats_filter": "",
-			"type": "DocType"
-		},
-		{
-			"color": "Red",
-			"doc_view": "",
-			"label": "VAT Return",
-			"link_to": "VAT Return Report",
-			"stats_filter": "",
-			"type": "Report"
-		},
-		{
-			"color": "Red",
-			"doc_view": "",
-			"label": "WHT Report",
-			"link_to": "ITX.219.03.E Withholding Tax",
-			"stats_filter": "",
-			"type": "Report"
-		},
-		{
-			"color": "Cyan",
-			"doc_view": "List",
-			"label": "Employees",
-			"link_to": "Employee",
-			"stats_filter": "",
-			"type": "DocType"
-		},
-		{
-			"color": "Cyan",
-			"doc_view": "List",
-			"label": "Salary Slips",
-			"link_to": "Salary Slip",
-			"stats_filter": "",
-			"type": "DocType"
-		},
-		{
-			"color": "Purple",
-			"doc_view": "",
-			"label": "PAYE/SDL Report",
-			"link_to": "PAYE and SDL Report",
-			"stats_filter": "",
-			"type": "Report"
-		},
-		{
-			"color": "Purple",
-			"doc_view": "",
-			"label": "NSSF Report",
-			"link_to": "NSSF Contribution Report",
-			"stats_filter": "",
-			"type": "Report"
-		},
-		{
-			"color": "Pink",
-			"doc_view": "",
-			"label": "CEO Dashboard",
-			"link_to": "CEO Dashboard",
-			"stats_filter": "",
-			"type": "Report"
-		}
-	],
-	"title": "Tanzania"
+ "charts": [],
+ "content": "[{\"id\":\"DLqB9eT2PY\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Tanzania Tax &amp; Payroll</span>\",\"col\":12}},{\"id\":\"_ukYFDVPdz\",\"type\":\"card\",\"data\":{\"card_name\":\"EFD Integration\",\"col\":4}},{\"id\":\"tcSdVhxvOj\",\"type\":\"card\",\"data\":{\"card_name\":\"Tax Setup\",\"col\":4}},{\"id\":\"Dvpi_ngAnL\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales and Purchase\",\"col\":4}},{\"id\":\"A8_mV0qu6H\",\"type\":\"card\",\"data\":{\"card_name\":\"Payroll Setup\",\"col\":4}},{\"id\":\"_IWhNmcNTv\",\"type\":\"card\",\"data\":{\"card_name\":\"Tax Report\",\"col\":4}},{\"id\":\"xiIarxp1kX\",\"type\":\"card\",\"data\":{\"card_name\":\"Payroll Report\",\"col\":4}}]",
+ "creation": "2026-01-21 14:08:48.094982",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "accounting",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Tanzania",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tax Setup",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item Tax Template",
+   "link_count": 0,
+   "link_to": "Item Tax Template",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tax Category",
+   "link_count": 0,
+   "link_to": "Tax Category",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Taxes and Charges Template",
+   "link_count": 0,
+   "link_to": "Sales Taxes and Charges Template",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Taxes and Charges Template",
+   "link_count": 0,
+   "link_to": "Purchase Taxes and Charges Template",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tax Rule",
+   "link_count": 0,
+   "link_to": "Tax Rule",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales and Purchase",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer",
+   "link_count": 0,
+   "link_to": "Customer",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Supplier",
+   "link_count": 0,
+   "link_to": "Supplier",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Invoice",
+   "link_count": 0,
+   "link_to": "Sales Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Invoice",
+   "link_count": 0,
+   "link_to": "Purchase Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tax Report",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Input VAT Return",
+   "link_count": 0,
+   "link_to": "Input VAT Return",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "VAT eFiling Return",
+   "link_count": 0,
+   "link_to": "VAT eFiling Return",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "ITX 219 03 E Withholding Tax",
+   "link_count": 0,
+   "link_to": "ITX 219 03 E Withholding Tax",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payroll Setup",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Salary Component",
+   "link_count": 0,
+   "link_to": "Salary Component",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Salary Structure",
+   "link_count": 0,
+   "link_to": "Salary Structure",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Salary Structure Assignment",
+   "link_count": 0,
+   "link_to": "Salary Structure Assignment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bulk Salary Structure Assignment",
+   "link_count": 0,
+   "link_to": "Bulk Salary Structure Assignment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Salary Slip",
+   "link_count": 0,
+   "link_to": "Salary Slip",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payroll Entry",
+   "link_count": 0,
+   "link_to": "Payroll Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "EFD Integration",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "EFD Settings",
+   "link_count": 0,
+   "link_to": "EFD Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": " EFD Posting Log",
+   "link_count": 0,
+   "link_to": "EFD Posting Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "EFD Daily Sales",
+   "link_count": 0,
+   "link_to": "EFD Daily Sales",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "EFD Summary",
+   "link_count": 0,
+   "link_to": "EFD Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "EFD Z-Report",
+   "link_count": 0,
+   "link_to": "EFD Z-Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payroll Report",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Payroll Cost Analysis",
+   "link_count": 0,
+   "link_to": "Payroll Cost Analysis",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Monthly Payroll Summary",
+   "link_count": 0,
+   "link_to": "Monthly Payroll Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "PAYE and SDL Report",
+   "link_count": 0,
+   "link_to": "PAYE and SDL Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "HESLB Return",
+   "link_count": 0,
+   "link_to": "HESLB Return",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "NSSF Contribution Report",
+   "link_count": 0,
+   "link_to": "NSSF Contribution Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "WCF Contribution Report",
+   "link_count": 0,
+   "link_to": "WCF Contribution Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-01-21 16:16:40.213184",
+ "modified_by": "Administrator",
+ "module": "Tanzania",
+ "name": "Tanzania",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 6.0,
+ "shortcuts": [],
+ "title": "Tanzania"
 }
