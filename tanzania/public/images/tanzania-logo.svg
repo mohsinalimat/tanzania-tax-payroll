@@ -1,0 +1,18 @@
+<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="roundedRect">
+      <rect width="72" height="72" rx="12"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#roundedRect)">
+    <!-- Green background (top-left) -->
+    <rect width="72" height="72" fill="#1EB53A"/>
+    <!-- Blue triangle (bottom-right) -->
+    <polygon points="72,0 72,72 0,72" fill="#00A3DD"/>
+    <!-- Black diagonal stripe -->
+    <polygon points="0,52 0,72 20,72 72,20 72,0 52,0" fill="#000000"/>
+    <!-- Yellow border stripes -->
+    <polygon points="0,44 0,52 52,0 44,0" fill="#FCD116"/>
+    <polygon points="20,72 28,72 72,28 72,20" fill="#FCD116"/>
+  </g>
+</svg>

@@ -11,15 +11,15 @@ app_license = "mit"
 # required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "tanzania",
-# 		"logo": "/assets/tanzania/logo.png",
-# 		"title": "Tanzania",
-# 		"route": "/tanzania",
-# 		"has_permission": "tanzania.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "tanzania",
+		"logo": "/assets/tanzania/images/tanzania-logo.svg",
+		"title": "Tanzania",
+		"route": "/app/tanzania",
+		"has_permission": "tanzania.api.permission.has_app_permission"
+	}
+]
 
 # Includes in <head>
 # ------------------
