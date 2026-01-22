@@ -101,7 +101,7 @@ def get_data(filters):
 	conditions = get_conditions(filters)
 
 	# Get salary slips with HESLB deductions
-	# Note: nida_number and heslb_loan_number are custom fields on Employee
+	# Note: nida and heslb are custom fields on Employee
 	salary_slips = frappe.db.sql("""
 		SELECT
 			ss.name as salary_slip,
@@ -113,14 +113,14 @@ def get_data(filters):
 			ss.start_date,
 			ss.end_date,
 			e.heslb,
-			COALESCE(e.nida_number, '') as nida_no,
-			COALESCE(e.heslb_loan_number, '') as loan_no
+			COALESCE(e.nida, '') as nida_no,
+			COALESCE(e.heslb, '') as loan_no
 		FROM `tabSalary Slip` ss
 		INNER JOIN `tabEmployee` e ON ss.employee = e.name
 		WHERE ss.docstatus = 1
 			AND ss.company = %(company)s
 			AND ss.posting_date BETWEEN %(from_date)s AND %(to_date)s
-			AND e.heslb = 1
+			AND e.heslb IS NOT NULL AND e.heslb != ''
 			{conditions}
 		ORDER BY ss.employee, ss.posting_date
 	""".format(conditions=conditions), {

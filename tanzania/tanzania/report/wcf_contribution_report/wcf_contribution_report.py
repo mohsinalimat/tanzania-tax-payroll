@@ -29,6 +29,12 @@ def get_columns():
 			"width": 200
 		},
 		{
+			"fieldname": "wcf_number",
+			"label": _("WCF Number"),
+			"fieldtype": "Data",
+			"width": 130
+		},
+		{
 			"fieldname": "designation",
 			"label": _("Designation"),
 			"fieldtype": "Link",
@@ -86,7 +92,8 @@ def get_data(filters):
 			ss.designation,
 			ss.gross_pay,
 			ss.posting_date,
-			e.date_of_joining
+			e.date_of_joining,
+			e.wcf_number
 		FROM `tabSalary Slip` ss
 		INNER JOIN `tabEmployee` e ON ss.employee = e.name
 		WHERE ss.docstatus = 1
@@ -107,6 +114,7 @@ def get_data(filters):
 		row = {
 			"employee": slip.employee,
 			"employee_name": slip.employee_name,
+			"wcf_number": slip.wcf_number or "",
 			"designation": slip.designation,
 			"department": slip.department,
 			"date_of_joining": slip.date_of_joining,

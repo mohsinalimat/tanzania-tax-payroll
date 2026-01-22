@@ -29,6 +29,12 @@ def get_columns():
 			"width": 200
 		},
 		{
+			"fieldname": "pension_fund_number",
+			"label": _("NSSF Number"),
+			"fieldtype": "Data",
+			"width": 130
+		},
+		{
 			"fieldname": "date_of_joining",
 			"label": _("Date of Joining"),
 			"fieldtype": "Date",
@@ -91,11 +97,12 @@ def get_data(filters):
 			ss.gross_pay,
 			ss.posting_date,
 			e.date_of_joining,
-			e.nssf
+			e.pension_fund,
+			e.pension_fund_number
 		FROM `tabSalary Slip` ss
 		INNER JOIN `tabEmployee` e ON ss.employee = e.name
 		WHERE ss.docstatus = 1
-			AND e.nssf = 1
+			AND e.pension_fund = 'NSSF'
 			{conditions}
 		ORDER BY ss.employee, ss.posting_date
 	""", filters, as_dict=1)
@@ -119,6 +126,7 @@ def get_data(filters):
 		row = {
 			"employee": slip.employee,
 			"employee_name": slip.employee_name,
+			"pension_fund_number": slip.pension_fund_number or "",
 			"date_of_joining": slip.date_of_joining,
 			"department": slip.department,
 			"gross_pay": flt(slip.gross_pay),

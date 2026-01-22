@@ -171,6 +171,7 @@
    "type": "Link"
   },
   {
+   "description": "Tanzania Payroll Setup",
    "hidden": 0,
    "is_query_report": 0,
    "label": "Payroll Setup",
@@ -242,65 +243,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "EFD Integration",
-   "link_count": 5,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "EFD Settings",
-   "link_count": 0,
-   "link_to": "EFD Settings",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": " EFD Posting Log",
-   "link_count": 0,
-   "link_to": "EFD Posting Log",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "EFD Daily Sales",
-   "link_count": 0,
-   "link_to": "EFD Daily Sales",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "EFD Summary",
-   "link_count": 0,
-   "link_to": "EFD Summary",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "EFD Z-Report",
-   "link_count": 0,
-   "link_to": "EFD Z-Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Payroll Report",
    "link_count": 6,
    "link_type": "DocType",
@@ -366,9 +308,78 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "EFD Integration",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "EFD Settings",
+   "link_count": 0,
+   "link_to": "EFD Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": " EFD Posting Log",
+   "link_count": 0,
+   "link_to": "EFD Posting Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "EFD Daily Sales",
+   "link_count": 0,
+   "link_to": "EFD Daily Sales",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "EFD Summary",
+   "link_count": 0,
+   "link_to": "EFD Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "EFD Z-Report",
+   "link_count": 0,
+   "link_to": "EFD Z-Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "VAT Output Reconciliation",
+   "link_count": 0,
+   "link_to": "VAT Output Reconciliation",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-01-21 16:16:40.213184",
+ "modified": "2026-01-22 14:41:00.470154",
  "modified_by": "Administrator",
  "module": "Tanzania",
  "name": "Tanzania",

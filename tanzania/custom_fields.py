@@ -12,55 +12,99 @@ def get_tanzania_custom_fields():
 	"""Returns dictionary of custom fields for Tanzania tax and payroll compliance"""
 	return {
 		"Employee": [
+			# Statutory Details Section - Clean 4-column grid layout
 			{
-				"fieldname": "tanzania_payroll_section",
+				"fieldname": "statutory_details_section",
 				"fieldtype": "Section Break",
-				"label": _("Tanzania Payroll Information"),
+				"label": _("Statutory Details"),
 				"insert_after": "salary_mode",
 			},
+			# Row 1 - Column 1
 			{
-				"fieldname": "nssf",
-				"fieldtype": "Check",
-				"label": _("NSSF Registered"),
-				"description": _("Employee is registered with NSSF (National Social Security Fund)"),
-				"insert_after": "tanzania_payroll_section",
-				"default": "0",
+				"fieldname": "pension_fund",
+				"fieldtype": "Select",
+				"label": _("Pension Fund"),
+				"options": "\nNSSF\nPSSF",
+				"insert_after": "statutory_details_section",
 			},
 			{
-				"fieldname": "pssf",
-				"fieldtype": "Check",
-				"label": _("PSSF Registered"),
-				"description": _("Employee is registered with PSSF (Public Service Social Security Fund)"),
-				"insert_after": "nssf",
-				"default": "0",
-			},
-			{
-				"fieldname": "column_break_payroll",
+				"fieldname": "col_break_stat_1",
 				"fieldtype": "Column Break",
-				"insert_after": "pssf",
+				"insert_after": "pension_fund",
 			},
+			# Row 1 - Column 2
+			{
+				"fieldname": "employee_tin",
+				"fieldtype": "Data",
+				"label": _("TIN"),
+				"insert_after": "col_break_stat_1",
+			},
+			{
+				"fieldname": "col_break_stat_2",
+				"fieldtype": "Column Break",
+				"insert_after": "employee_tin",
+			},
+			# Row 1 - Column 3
 			{
 				"fieldname": "heslb",
-				"fieldtype": "Check",
-				"label": _("HESLB Loan"),
-				"description": _("Employee has HESLB (Higher Education Students Loans Board) loan - 15% deduction"),
-				"insert_after": "column_break_payroll",
-				"default": "0",
-			},
-			{
-				"fieldname": "heslb_loan_number",
 				"fieldtype": "Data",
-				"label": _("HESLB Loan Number"),
-				"description": _("HESLB Loan Account Number"),
+				"label": _("HESLB"),
+				"insert_after": "col_break_stat_2",
+			},
+			# Row 2
+			{
+				"fieldname": "section_break_stat_row2",
+				"fieldtype": "Section Break",
 				"insert_after": "heslb",
-				"depends_on": "eval:doc.heslb==1",
+			},
+			# Row 2 - Column 1
+			{
+				"fieldname": "pension_fund_number",
+				"fieldtype": "Data",
+				"label": _("Pension Fund Number"),
+				"insert_after": "section_break_stat_row2",
 			},
 			{
-				"fieldname": "nida_number",
+				"fieldname": "col_break_stat_4",
+				"fieldtype": "Column Break",
+				"insert_after": "pension_fund_number",
+			},
+			# Row 2 - Column 2
+			{
+				"fieldname": "wcf_number",
 				"fieldtype": "Data",
-				"label": _("NIDA Number"),
-				"description": _("National Identification Authority (NIDA) Number"),
-				"insert_after": "heslb_loan_number",
+				"label": _("WCF Number"),
+				"insert_after": "col_break_stat_4",
+			},
+			{
+				"fieldname": "col_break_stat_5",
+				"fieldtype": "Column Break",
+				"insert_after": "wcf_number",
+			},
+			# Row 2 - Column 3
+			{
+				"fieldname": "national_identity",
+				"fieldtype": "Data",
+				"label": _("National Identity"),
+				"insert_after": "col_break_stat_5",
+			},
+			{
+				"fieldname": "col_break_stat_6",
+				"fieldtype": "Column Break",
+				"insert_after": "national_identity",
+			},
+			# Row 2 - Column 4
+			{
+				"fieldname": "nida",
+				"fieldtype": "Data",
+				"label": _("NIDA"),
+				"insert_after": "col_break_stat_6",
+			},
+			# Employment Type (separate section or can be added to existing)
+			{
+				"fieldname": "employment_type_section",
+				"fieldtype": "Section Break",
+				"insert_after": "nida",
 			},
 			{
 				"fieldname": "employment_type",
@@ -68,7 +112,7 @@ def get_tanzania_custom_fields():
 				"label": _("Employment Type"),
 				"options": "Primary\nSecondary",
 				"description": _("Primary or Secondary employment (affects PAYE calculation)"),
-				"insert_after": "nida_number",
+				"insert_after": "employment_type_section",
 				"default": "Primary",
 			},
 		],
