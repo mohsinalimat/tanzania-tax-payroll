@@ -8,7 +8,6 @@
 	</p>
 
 [![CI](https://github.com/nelsonmpanju/tanzania/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/nelsonmpanju/tanzania/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
 
@@ -97,8 +96,9 @@ Tanzanian businesses face unique compliance requirements that generic ERP soluti
 ## Installation
 
 ### Prerequisites
-- ERPNext v14 or later
-- Frappe Framework v14 or later
+- ERPNext v15 or later
+- Frappe HR v15 or later
+- Frappe Framework v15 or later
 
 ### Setup
 
