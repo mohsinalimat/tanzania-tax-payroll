@@ -77,10 +77,10 @@ Tanzanian businesses face unique compliance requirements that generic ERP soluti
 
 <details>
 <summary>View Screenshots</summary>
-	<img src=".github/tanzania-efd.png"/>
+	<img src=".github/tanzania-hero.png"/>
 	<img src=".github/tanzania-payroll.png"/>
 	<img src=".github/tanzania-reports.png"/>
-	<img src=".github/tanzania-workspace.png"/>
+	<img src=".github/tanzania-efd.png"/>
 </details>
 
 ## PAYE Tax Brackets (Monthly)
