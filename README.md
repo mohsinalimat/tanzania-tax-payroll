@@ -7,7 +7,6 @@
 		<p>Complete Tax Compliance and Payroll Solution for Tanzanian Businesses</p>
 	</p>
 
-[![CI](https://github.com/nelsonmpanju/tanzania/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/nelsonmpanju/tanzania/actions/workflows/ci.yml)
 
 </div>
 
@@ -18,9 +17,13 @@
 <div align="center">
 	<a href="https://github.com/nelsonmpanju/tanzania">GitHub</a>
 	-
+	<a href="SETUP.md">Setup Guide</a>
+	-
 	<a href="#installation">Installation</a>
 	-
-	<a href="#features">Features</a>
+	<a href="#key-features">Features</a>
+	-
+	<a href="LICENSE">License</a>
 </div>
 
 ## Tanzania Tax & Payroll

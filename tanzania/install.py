@@ -26,9 +26,6 @@ def setup_tanzania_taxes():
 	# Create custom fields first (TIN, VRN, etc.)
 	create_tanzania_custom_fields()
 
-	# Create statutory suppliers (TRA, NSSF, etc.) for party selection in journal entries
-	create_statutory_suppliers()
-
 	companies = frappe.get_all("Company", filters={"country": "Tanzania"}, fields=["name", "abbr"])
 
 	if not companies:
@@ -423,73 +420,6 @@ def create_tax_categories():
 				"doctype": "Tax Category",
 				"title": category["title"],
 			}).insert(ignore_permissions=True, ignore_if_duplicate=True)
-
-
-def create_statutory_suppliers():
-	"""Create suppliers for Tanzania statutory bodies (TRA, NSSF, WCF, HESLB)
-	These are used as Party in journal entries for payable accounts"""
-
-	statutory_suppliers = [
-		{
-			"supplier_name": "Tanzania Revenue Authority (TRA)",
-			"supplier_group": "Government",
-			"supplier_type": "Company",
-			"country": "Tanzania",
-			"tin": "100-100-100",  # TRA's own TIN
-		},
-		{
-			"supplier_name": "National Social Security Fund (NSSF)",
-			"supplier_group": "Government",
-			"supplier_type": "Company",
-			"country": "Tanzania",
-		},
-		{
-			"supplier_name": "Workers Compensation Fund (WCF)",
-			"supplier_group": "Government",
-			"supplier_type": "Company",
-			"country": "Tanzania",
-		},
-		{
-			"supplier_name": "Higher Education Students Loans Board (HESLB)",
-			"supplier_group": "Government",
-			"supplier_type": "Company",
-			"country": "Tanzania",
-		},
-		{
-			"supplier_name": "Public Service Social Security Fund (PSSF)",
-			"supplier_group": "Government",
-			"supplier_type": "Company",
-			"country": "Tanzania",
-		},
-	]
-
-	# Ensure Government supplier group exists
-	if not frappe.db.exists("Supplier Group", "Government"):
-		frappe.get_doc({
-			"doctype": "Supplier Group",
-			"supplier_group_name": "Government",
-		}).insert(ignore_permissions=True, ignore_if_duplicate=True)
-
-	for supplier_data in statutory_suppliers:
-		supplier_name = supplier_data["supplier_name"]
-
-		if not frappe.db.exists("Supplier", supplier_name):
-			supplier_doc = frappe.get_doc({
-				"doctype": "Supplier",
-				"supplier_name": supplier_name,
-				"supplier_group": supplier_data.get("supplier_group", "Government"),
-				"supplier_type": supplier_data.get("supplier_type", "Company"),
-				"country": supplier_data.get("country", "Tanzania"),
-			})
-
-			# Add TIN if provided
-			if supplier_data.get("tin"):
-				supplier_doc.tin = supplier_data["tin"]
-
-			supplier_doc.flags.ignore_links = True
-			supplier_doc.flags.ignore_validate = True
-			supplier_doc.flags.ignore_mandatory = True
-			supplier_doc.insert(ignore_permissions=True, ignore_if_duplicate=True)
 
 
 def create_sales_tax_templates(company_name, company_abbr):
