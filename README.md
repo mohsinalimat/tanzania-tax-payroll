@@ -26,21 +26,19 @@
 	<a href="LICENSE">License</a>
 </div>
 
-<div align="center">
- ## Tanzania Tax & Payroll
-</div>
+<h2>Tanzania Tax & Payroll</h2>
 
 Tanzania Tax & Payroll is a comprehensive ERPNext application designed specifically for Tanzanian businesses. It provides complete tax compliance with TRA (Tanzania Revenue Authority), seamless EFD (Electronic Fiscal Device) integration, and a full-featured payroll system with all statutory deductions including PAYE, NSSF, PSSF, SDL, WCF, and HESLB.
 
-## Motivation
+<h2> Motivation </h2>
 
-Tanzanian businesses face unique compliance requirements that generic ERP solutions don't address out of the box. From complex PAYE tax brackets to mandatory EFD receipt submission, businesses need a solution that understands local regulations. This app bridges that gap by providing:
+Tanzanian businesses face unique compliance requirements that generic ERP solutions don't address out of the box. From complex PAYE tax to mandatory EFD receipt submission, businesses need a solution that understands local regulations. This app bridges that gap by providing:
 
 - **TRA Compliance**: Automatic VAT calculations, withholding tax, and e-filing ready reports
 - **EFD Integration**: Real-time fiscal receipt submission to TRA through multiple providers
-- **Local Payroll**: Complete statutory deductions with proper formulas and tax brackets
+- **Local Payroll**: Complete statutory deductions with proper formulas and tax
 
-## Key Features
+<h2> Key Features </h2>
 
 ### Tax Compliance
 - **VAT Management**: 18% standard rate with support for zero-rated, exempt, and special relief categories
@@ -62,7 +60,7 @@ Tanzanian businesses face unique compliance requirements that generic ERP soluti
 - **SDL**: Skills Development Levy (3.5% employer)
 - **WCF**: Workers Compensation Fund (0.5% employer)
 - **HESLB**: Higher Education Students Loans Board (15% deduction)
-- **PAYE**: Automatic tax bracket application with primary/secondary employment support
+- **PAYE**: Automatic tax application with primary/secondary employment support
 
 ### Reports (20+ Reports)
 - VAT Return Report
@@ -88,7 +86,7 @@ Tanzanian businesses face unique compliance requirements that generic ERP soluti
 	<img src=".github/tanzania-efd.png"/>
 </details>
 
-## PAYE Tax Brackets (Monthly)
+## PAYE Tax (Monthly)
 
 | Income Range (TZS) | Tax Rate |
 |-------------------|----------|
