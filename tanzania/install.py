@@ -58,6 +58,9 @@ def setup_tanzania_taxes():
 		# Create Item Tax Templates
 		create_item_tax_templates(company_name, company_abbr)
 
+		# Create Tax Withholding Categories (ERPNext native WHT)
+		create_tax_withholding_categories(company_name, company_abbr)
+
 	frappe.db.commit()
 	frappe.msgprint(_("Tanzania tax setup completed successfully"))
 
@@ -637,3 +640,69 @@ def create_item_tax_templates(company_name, company_abbr):
 		template_doc.flags.ignore_links = True
 		template_doc.flags.ignore_validate = True
 		template_doc.insert(ignore_permissions=True, ignore_if_duplicate=True)
+
+
+def create_tax_withholding_categories(company_name, company_abbr):
+	"""Create Tax Withholding Categories for Tanzania (ERPNext native WHT)"""
+
+	# Get fiscal year
+	from erpnext.accounts.utils import get_fiscal_year
+	try:
+		fiscal_year = get_fiscal_year(frappe.utils.today(), company=company_name)[0]
+	except Exception:
+		fiscal_year = frappe.db.get_value("Fiscal Year", {"disabled": 0}, "name", order_by="year_start_date desc")
+
+	# Tanzania Withholding Tax Categories
+	wht_categories = [
+		{
+			"name": "Tanzania WHT 2% - Services",
+			"category_name": "Tanzania WHT 2% - Services",
+			"rates": [{"from_date": "2024-01-01", "tax_withholding_rate": 2, "single_threshold": 0, "cumulative_threshold": 0}],
+			"accounts": [{"company": company_name, "account": f"Withholding Tax Payable - {company_abbr}"}],
+		},
+		{
+			"name": "Tanzania WHT 5% - Rent",
+			"category_name": "Tanzania WHT 5% - Rent",
+			"rates": [{"from_date": "2024-01-01", "tax_withholding_rate": 5, "single_threshold": 0, "cumulative_threshold": 0}],
+			"accounts": [{"company": company_name, "account": f"Withholding Tax Payable - {company_abbr}"}],
+		},
+		{
+			"name": "Tanzania WHT 10% - Professional",
+			"category_name": "Tanzania WHT 10% - Professional",
+			"rates": [{"from_date": "2024-01-01", "tax_withholding_rate": 10, "single_threshold": 0, "cumulative_threshold": 0}],
+			"accounts": [{"company": company_name, "account": f"Withholding Tax Payable - {company_abbr}"}],
+		},
+		{
+			"name": "Tanzania WHT 15% - Non-Resident",
+			"category_name": "Tanzania WHT 15% - Non-Resident",
+			"rates": [{"from_date": "2024-01-01", "tax_withholding_rate": 15, "single_threshold": 0, "cumulative_threshold": 0}],
+			"accounts": [{"company": company_name, "account": f"Withholding Tax Payable - {company_abbr}"}],
+		},
+	]
+
+	for category in wht_categories:
+		if frappe.db.exists("Tax Withholding Category", category["name"]):
+			# Update accounts if company not already added
+			existing_doc = frappe.get_doc("Tax Withholding Category", category["name"])
+			company_exists = any(acc.company == company_name for acc in existing_doc.accounts)
+			if not company_exists:
+				existing_doc.append("accounts", category["accounts"][0])
+				existing_doc.flags.ignore_validate = True
+				existing_doc.save(ignore_permissions=True)
+			continue
+
+		doc = frappe.get_doc({
+			"doctype": "Tax Withholding Category",
+			"name": category["name"],
+			"category_name": category["category_name"],
+		})
+
+		for rate in category["rates"]:
+			doc.append("rates", rate)
+
+		for account in category["accounts"]:
+			doc.append("accounts", account)
+
+		doc.flags.ignore_validate = True
+		doc.flags.ignore_mandatory = True
+		doc.insert(ignore_permissions=True, ignore_if_duplicate=True)

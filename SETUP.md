@@ -160,6 +160,52 @@ Taxes:
   - Description: Input VAT 18%
 ```
 
+### 3.6 Withholding Tax (WHT) Setup
+
+Tanzania requires businesses to withhold tax on certain payments to suppliers. The app uses ERPNext's native **Tax Withholding Category** feature.
+
+#### WHT Categories Created Automatically
+
+| Category Name | WHT Rate | Use Case |
+|--------------|----------|----------|
+| Tanzania WHT 2% - Services | 2% | Service payments |
+| Tanzania WHT 5% - Rent | 5% | Rent/Lease payments |
+| Tanzania WHT 10% - Professional | 10% | Professional/Technical fees |
+| Tanzania WHT 15% - Non-Resident | 15% | Payments to non-residents |
+
+#### Setting Up WHT for a Supplier
+
+1. Go to **Buying > Supplier > [Supplier Name]**
+2. In the **Tax** section, set **Tax Withholding Category**
+   - Example: Select "Tanzania WHT 2% - Services" for service suppliers
+3. Save the supplier
+
+#### Using WHT on Purchase Invoices
+
+1. Create a new **Purchase Invoice**
+2. Select a supplier with Tax Withholding Category set
+3. Check **Apply Tax Withholding Amount** checkbox
+4. Add your items and taxes as usual
+5. The system will **automatically deduct WHT** from the invoice total
+6. Submit the invoice
+
+**Example Calculation:**
+```
+Net Total:           1,000,000 TZS
++ VAT 18%:             180,000 TZS
+- WHT 2%:              -20,000 TZS (auto-calculated)
+= Grand Total:       1,160,000 TZS
+```
+
+#### WHT Reporting
+
+To view all WHT transactions:
+1. Go to **Tanzania > Tax Report > ITX 219.03.E Withholding Tax**
+2. Select your company and date range
+3. The report shows all Purchase Invoices with WHT applied
+
+> **Note**: The WHT report only shows data when suppliers have Tax Withholding Category assigned and Purchase Invoices are created with "Apply Tax Withholding Amount" checked.
+
 ---
 
 ## 4. EFD Integration

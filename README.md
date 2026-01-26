@@ -26,7 +26,9 @@
 	<a href="LICENSE">License</a>
 </div>
 
-## Tanzania Tax & Payroll
+<div align="center">
+ ## Tanzania Tax & Payroll
+</div>
 
 Tanzania Tax & Payroll is a comprehensive ERPNext application designed specifically for Tanzanian businesses. It provides complete tax compliance with TRA (Tanzania Revenue Authority), seamless EFD (Electronic Fiscal Device) integration, and a full-featured payroll system with all statutory deductions including PAYE, NSSF, PSSF, SDL, WCF, and HESLB.
 
