@@ -96,7 +96,7 @@ def get_data(filters):
 		SELECT
 			pi.name as invoice_no,
 			pi.posting_date as payment_date,
-			pi.supplier,
+			pi.supplier as supplier_id,
 			pi.supplier_name as withholdee_name,
 			s.tin,
 			pi.grand_total,
@@ -116,6 +116,7 @@ def get_data(filters):
 		"company": company,
 		"from_date": filters.get("from_date"),
 		"to_date": filters.get("to_date"),
+		"supplier_filter": filters.get("supplier"),
 		"wht_account": f"%Withholding%{company_abbr}%"
 	}, as_dict=1)
 
@@ -191,7 +192,7 @@ def get_conditions(filters):
 	if filters.get("to_date"):
 		conditions += " AND pi.posting_date <= %(to_date)s"
 	if filters.get("supplier"):
-		conditions += " AND pi.supplier = %(supplier)s"
+		conditions += " AND pi.supplier = %(supplier_filter)s"
 	return conditions
 
 

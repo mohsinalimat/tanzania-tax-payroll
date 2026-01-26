@@ -151,30 +151,20 @@ def get_tanzania_custom_fields():
 			},
 		],
 		"Customer": [
-			{
-				"fieldname": "tanzania_tax_section",
-				"fieldtype": "Section Break",
-				"label": _("Tanzania Tax Information"),
-				"insert_after": "credit_limit",
-			},
+			# TIN and VRN in Tax tab (after tax_id field)
 			{
 				"fieldname": "tin",
 				"fieldtype": "Data",
-				"label": _("TIN (Tax Identification Number)"),
-				"description": _("Customer Tax Identification Number"),
-				"insert_after": "tanzania_tax_section",
+				"label": _("TIN"),
+				"description": _("Tax Identification Number"),
+				"insert_after": "tax_id",
 			},
 			{
 				"fieldname": "vrn",
 				"fieldtype": "Data",
-				"label": _("VRN (VAT Registration Number)"),
-				"description": _("Customer VAT Registration Number"),
+				"label": _("VRN"),
+				"description": _("VAT Registration Number"),
 				"insert_after": "tin",
-			},
-			{
-				"fieldname": "column_break_tax_info",
-				"fieldtype": "Column Break",
-				"insert_after": "vrn",
 			},
 			{
 				"fieldname": "efd_id_type",
@@ -182,64 +172,35 @@ def get_tanzania_custom_fields():
 				"label": _("EFD ID Type"),
 				"options": "\n1-TIN\n2-Driving License\n3-Voter ID\n4-Passport\n5-NID\n6-Other",
 				"description": _("Customer identification type for EFD receipts"),
-				"insert_after": "column_break_tax_info",
-			},
-			{
-				"fieldname": "tax_category",
-				"fieldtype": "Link",
-				"label": _("Tax Category"),
-				"options": "Tax Category",
-				"insert_after": "efd_id_type",
+				"insert_after": "vrn",
 			},
 		],
 		"Supplier": [
-			{
-				"fieldname": "tanzania_tax_section",
-				"fieldtype": "Section Break",
-				"label": _("Tanzania Tax Information"),
-				"insert_after": "credit_limit",
-			},
+			# TIN and VRN in Tax tab (after tax_id field)
 			{
 				"fieldname": "tin",
 				"fieldtype": "Data",
-				"label": _("TIN (Tax Identification Number)"),
-				"description": _("Supplier Tax Identification Number"),
-				"insert_after": "tanzania_tax_section",
+				"label": _("TIN"),
+				"description": _("Tax Identification Number"),
+				"insert_after": "tax_id",
 			},
 			{
 				"fieldname": "vrn",
 				"fieldtype": "Data",
-				"label": _("VRN (VAT Registration Number)"),
-				"description": _("Supplier VAT Registration Number"),
+				"label": _("VRN"),
+				"description": _("VAT Registration Number"),
 				"insert_after": "tin",
-			},
-			{
-				"fieldname": "column_break_tax_info",
-				"fieldtype": "Column Break",
-				"insert_after": "vrn",
-			},
-			{
-				"fieldname": "tax_category",
-				"fieldtype": "Link",
-				"label": _("Tax Category"),
-				"options": "Tax Category",
-				"insert_after": "column_break_tax_info",
 			},
 		],
 		"Sales Invoice": [
-			{
-				"fieldname": "tanzania_tax_section",
-				"fieldtype": "Section Break",
-				"label": _("Tanzania Tax Information"),
-				"insert_after": "taxes_section",
-			},
+			# Customer TIN/VRN below customer_name field
 			{
 				"fieldname": "customer_tin",
 				"fieldtype": "Data",
 				"label": _("Customer TIN"),
 				"fetch_from": "customer.tin",
 				"read_only": 1,
-				"insert_after": "tanzania_tax_section",
+				"insert_after": "customer_name",
 			},
 			{
 				"fieldname": "customer_vrn",
@@ -249,33 +210,12 @@ def get_tanzania_custom_fields():
 				"read_only": 1,
 				"insert_after": "customer_tin",
 			},
-			{
-				"fieldname": "column_break_tax_info",
-				"fieldtype": "Column Break",
-				"insert_after": "customer_vrn",
-			},
-			{
-				"fieldname": "company_tin",
-				"fieldtype": "Data",
-				"label": _("Company TIN"),
-				"fetch_from": "company.tin",
-				"read_only": 1,
-				"insert_after": "column_break_tax_info",
-			},
-			{
-				"fieldname": "company_vrn",
-				"fieldtype": "Data",
-				"label": _("Company VRN"),
-				"fetch_from": "company.vrn",
-				"read_only": 1,
-				"insert_after": "company_tin",
-			},
 			# EFD Fields
 			{
 				"fieldname": "efd_section",
 				"fieldtype": "Section Break",
 				"label": _("EFD Information"),
-				"insert_after": "company_vrn",
+				"insert_after": "taxes_section",
 				"collapsible": 1,
 			},
 			{
@@ -364,19 +304,14 @@ def get_tanzania_custom_fields():
 			},
 		],
 		"Purchase Invoice": [
-			{
-				"fieldname": "tanzania_tax_section",
-				"fieldtype": "Section Break",
-				"label": _("Tanzania Tax Information"),
-				"insert_after": "taxes_section",
-			},
+			# Supplier TIN/VRN below supplier_name field
 			{
 				"fieldname": "supplier_tin",
 				"fieldtype": "Data",
 				"label": _("Supplier TIN"),
 				"fetch_from": "supplier.tin",
 				"read_only": 1,
-				"insert_after": "tanzania_tax_section",
+				"insert_after": "supplier_name",
 			},
 			{
 				"fieldname": "supplier_vrn",
@@ -385,27 +320,6 @@ def get_tanzania_custom_fields():
 				"fetch_from": "supplier.vrn",
 				"read_only": 1,
 				"insert_after": "supplier_tin",
-			},
-			{
-				"fieldname": "column_break_tax_info",
-				"fieldtype": "Column Break",
-				"insert_after": "supplier_vrn",
-			},
-			{
-				"fieldname": "company_tin",
-				"fieldtype": "Data",
-				"label": _("Company TIN"),
-				"fetch_from": "company.tin",
-				"read_only": 1,
-				"insert_after": "column_break_tax_info",
-			},
-			{
-				"fieldname": "company_vrn",
-				"fieldtype": "Data",
-				"label": _("Company VRN"),
-				"fetch_from": "company.vrn",
-				"read_only": 1,
-				"insert_after": "company_tin",
 			},
 		],
 		"Item Tax Template": [

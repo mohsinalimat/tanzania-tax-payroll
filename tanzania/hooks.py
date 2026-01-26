@@ -44,7 +44,8 @@ add_to_apps_screen = [
 
 # include js in doctype views
 doctype_js = {
-	"Sales Invoice": "public/js/sales_invoice_efd.js"
+	"Sales Invoice": "public/js/sales_invoice_efd.js",
+	"Purchase Invoice": "public/js/purchase_invoice.js"
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
