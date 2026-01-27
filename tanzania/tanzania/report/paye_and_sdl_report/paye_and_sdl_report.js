@@ -42,14 +42,14 @@ frappe.query_reports["PAYE and SDL Report"] = {
 	"formatter": function(value, row, column, data, default_formatter) {
 		value = default_formatter(value, row, column, data);
 
-		// Highlight total PAYE column
-		if (column.fieldname == "total_paye" && data && data.total_paye > 0) {
-			value = "<span style='color:red; font-weight:bold'>" + value + "</span>";
+		// Highlight PAYE column in green
+		if (column.fieldname == "paye" && data && data.paye > 0) {
+			value = "<span style='color:green; font-weight:bold'>" + value + "</span>";
 		}
 
-		// Highlight SDL column
+		// Highlight SDL column in green
 		if (column.fieldname == "sdl" && data && data.sdl > 0) {
-			value = "<span style='color:blue; font-weight:bold'>" + value + "</span>";
+			value = "<span style='color:green; font-weight:bold'>" + value + "</span>";
 		}
 
 		return value;
