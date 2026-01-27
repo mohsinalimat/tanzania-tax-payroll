@@ -3,7 +3,7 @@
 
 import frappe
 from frappe import _
-from frappe.utils import flt, getdate
+from frappe.utils import flt
 
 
 def execute(filters=None):
@@ -29,90 +29,58 @@ def get_columns():
 			"width": 180
 		},
 		{
-			"fieldname": "department",
-			"label": _("Department"),
-			"fieldtype": "Link",
-			"options": "Department",
-			"width": 150
-		},
-		{
-			"fieldname": "designation",
-			"label": _("Designation"),
-			"fieldtype": "Link",
-			"options": "Designation",
-			"width": 150
-		},
-		{
 			"fieldname": "gross_pay",
 			"label": _("Gross Pay"),
 			"fieldtype": "Currency",
-			"width": 130
+			"width": 140
 		},
 		{
 			"fieldname": "nssf_employee",
-			"label": _("NSSF Employee"),
+			"label": _("NSSF (Employee)"),
 			"fieldtype": "Currency",
-			"width": 130
+			"width": 140
 		},
 		{
 			"fieldname": "taxable_income",
 			"label": _("Taxable Income"),
 			"fieldtype": "Currency",
-			"width": 130
+			"width": 140
 		},
 		{
-			"fieldname": "paye_0",
-			"label": _("PAYE 0%"),
+			"fieldname": "paye",
+			"label": _("PAYE"),
 			"fieldtype": "Currency",
-			"width": 110
-		},
-		{
-			"fieldname": "paye_8",
-			"label": _("PAYE 8%"),
-			"fieldtype": "Currency",
-			"width": 110
-		},
-		{
-			"fieldname": "paye_20",
-			"label": _("PAYE 20%"),
-			"fieldtype": "Currency",
-			"width": 110
-		},
-		{
-			"fieldname": "paye_25",
-			"label": _("PAYE 25%"),
-			"fieldtype": "Currency",
-			"width": 110
-		},
-		{
-			"fieldname": "paye_30",
-			"label": _("PAYE 30%"),
-			"fieldtype": "Currency",
-			"width": 110
-		},
-		{
-			"fieldname": "total_paye",
-			"label": _("Total PAYE"),
-			"fieldtype": "Currency",
-			"width": 130
+			"width": 140
 		},
 		{
 			"fieldname": "sdl",
 			"label": _("SDL (3.5%)"),
 			"fieldtype": "Currency",
-			"width": 130
+			"width": 140
+		},
+		{
+			"fieldname": "nssf_employer",
+			"label": _("NSSF (Employer)"),
+			"fieldtype": "Currency",
+			"width": 140
+		},
+		{
+			"fieldname": "wcf",
+			"label": _("WCF (1%)"),
+			"fieldtype": "Currency",
+			"width": 120
 		},
 		{
 			"fieldname": "net_pay",
 			"label": _("Net Pay"),
 			"fieldtype": "Currency",
-			"width": 130
+			"width": 140
 		}
 	]
 
 
 def get_data(filters):
-	"""Get salary slip data and calculate PAYE by bracket and SDL"""
+	"""Get salary slip data for PAYE and SDL report"""
 	if not filters:
 		filters = {}
 
@@ -131,42 +99,48 @@ def get_data(filters):
 		FROM `tabSalary Slip` ss
 		WHERE ss.docstatus = 1
 			{conditions}
-		ORDER BY ss.employee, ss.posting_date
+		ORDER BY ss.employee_name, ss.posting_date
 	""", filters, as_dict=1)
 
 	data = []
 
 	for slip in salary_slips:
-		# Get NSSF employee contribution
-		nssf_employee = get_component_amount(slip.name, "NSSF")
+		# Get NSSF employee contribution (deduction)
+		nssf_employee = get_deduction_amount(slip.name, ["NSSF", "NSSF Employee"])
 
-		# Get PAYE amount
-		paye_total = get_component_amount(slip.name, "PAYE")
+		# Get PAYE amount (deduction)
+		paye = get_deduction_amount(slip.name, ["PAYE", "Income Tax", "Pay As You Earn"])
+
+		# Get employer contributions from salary slip
+		nssf_employer = get_earning_amount(slip.name, ["NSSF Employer", "NSSF - Employer"])
+		sdl = get_earning_amount(slip.name, ["SDL", "Skills Development Levy"])
+		wcf = get_earning_amount(slip.name, ["WCF", "Workers Compensation Fund"])
 
 		# Calculate taxable income (gross - NSSF employee contribution)
 		taxable_income = flt(slip.gross_pay) - flt(nssf_employee)
 
-		# Calculate PAYE by bracket
-		paye_breakdown = calculate_paye_by_bracket(taxable_income)
+		# If SDL not found in salary slip, calculate it (3.5% of gross)
+		if not sdl:
+			sdl = flt(slip.gross_pay) * 0.035
 
-		# Calculate SDL (3.5% of gross pay - employer contribution)
-		sdl_amount = flt(slip.gross_pay) * 0.035
+		# If WCF not found, calculate it (1% of gross)
+		if not wcf:
+			wcf = flt(slip.gross_pay) * 0.01
+
+		# If NSSF employer not found, assume same as employee (10% each)
+		if not nssf_employer:
+			nssf_employer = flt(nssf_employee)
 
 		row = {
 			"employee": slip.employee,
 			"employee_name": slip.employee_name,
-			"department": slip.department,
-			"designation": slip.designation,
 			"gross_pay": flt(slip.gross_pay),
 			"nssf_employee": flt(nssf_employee),
 			"taxable_income": flt(taxable_income),
-			"paye_0": flt(paye_breakdown.get("paye_0", 0)),
-			"paye_8": flt(paye_breakdown.get("paye_8", 0)),
-			"paye_20": flt(paye_breakdown.get("paye_20", 0)),
-			"paye_25": flt(paye_breakdown.get("paye_25", 0)),
-			"paye_30": flt(paye_breakdown.get("paye_30", 0)),
-			"total_paye": flt(paye_total),
-			"sdl": flt(sdl_amount),
+			"paye": flt(paye),
+			"sdl": flt(sdl),
+			"nssf_employer": flt(nssf_employer),
+			"wcf": flt(wcf),
 			"net_pay": flt(slip.net_pay)
 		}
 
@@ -197,79 +171,53 @@ def get_conditions(filters):
 	return conditions
 
 
-def get_component_amount(salary_slip, component_name):
-	"""Get the amount for a specific salary component from salary slip"""
-	amount = frappe.db.get_value(
-		"Salary Detail",
-		{
-			"parent": salary_slip,
-			"parenttype": "Salary Slip",
-			"salary_component": component_name
-		},
-		"amount"
-	)
-	return flt(amount)
+def get_deduction_amount(salary_slip, component_names):
+	"""Get the amount for a deduction component (searches multiple possible names)"""
+	for name in component_names:
+		amount = frappe.db.get_value(
+			"Salary Detail",
+			{
+				"parent": salary_slip,
+				"parenttype": "Salary Slip",
+				"salary_component": ["like", f"%{name}%"],
+				"parentfield": "deductions"
+			},
+			"amount"
+		)
+		if amount:
+			return flt(amount)
+
+	# Also try exact match
+	for name in component_names:
+		amount = frappe.db.get_value(
+			"Salary Detail",
+			{
+				"parent": salary_slip,
+				"parenttype": "Salary Slip",
+				"salary_component": name,
+				"parentfield": "deductions"
+			},
+			"amount"
+		)
+		if amount:
+			return flt(amount)
+
+	return 0
 
 
-def calculate_paye_by_bracket(taxable_income):
-	"""
-	Calculate PAYE by tax bracket for Tanzania
+def get_earning_amount(salary_slip, component_names):
+	"""Get the amount for an earning/employer component"""
+	for name in component_names:
+		amount = frappe.db.get_value(
+			"Salary Detail",
+			{
+				"parent": salary_slip,
+				"parenttype": "Salary Slip",
+				"salary_component": ["like", f"%{name}%"]
+			},
+			"amount"
+		)
+		if amount:
+			return flt(amount)
 
-	Tax Brackets (Monthly):
-	- 0%: First 270,000 TZS
-	- 8%: 270,001 to 520,000 TZS
-	- 20%: 520,001 to 760,000 TZS
-	- 25%: 760,001 to 1,000,000 TZS
-	- 30%: Above 1,000,000 TZS
-	"""
-	taxable_income = flt(taxable_income)
-
-	paye_breakdown = {
-		"paye_0": 0,
-		"paye_8": 0,
-		"paye_20": 0,
-		"paye_25": 0,
-		"paye_30": 0
-	}
-
-	if taxable_income <= 0:
-		return paye_breakdown
-
-	# Bracket thresholds
-	bracket_1 = 270000  # 0%
-	bracket_2 = 520000  # 8%
-	bracket_3 = 760000  # 20%
-	bracket_4 = 1000000  # 25%
-	# Above bracket_4 = 30%
-
-	remaining_income = taxable_income
-
-	# 0% bracket (first 270,000)
-	if remaining_income > 0:
-		amount_in_bracket = min(remaining_income, bracket_1)
-		paye_breakdown["paye_0"] = 0  # No tax in this bracket
-		remaining_income -= amount_in_bracket
-
-	# 8% bracket (270,001 to 520,000)
-	if remaining_income > 0:
-		amount_in_bracket = min(remaining_income, bracket_2 - bracket_1)
-		paye_breakdown["paye_8"] = amount_in_bracket * 0.08
-		remaining_income -= amount_in_bracket
-
-	# 20% bracket (520,001 to 760,000)
-	if remaining_income > 0:
-		amount_in_bracket = min(remaining_income, bracket_3 - bracket_2)
-		paye_breakdown["paye_20"] = amount_in_bracket * 0.20
-		remaining_income -= amount_in_bracket
-
-	# 25% bracket (760,001 to 1,000,000)
-	if remaining_income > 0:
-		amount_in_bracket = min(remaining_income, bracket_4 - bracket_3)
-		paye_breakdown["paye_25"] = amount_in_bracket * 0.25
-		remaining_income -= amount_in_bracket
-
-	# 30% bracket (above 1,000,000)
-	if remaining_income > 0:
-		paye_breakdown["paye_30"] = remaining_income * 0.30
-
-	return paye_breakdown
+	return 0
