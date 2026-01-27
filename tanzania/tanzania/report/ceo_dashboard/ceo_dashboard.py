@@ -54,10 +54,12 @@ def get_data(filters):
 	# 2. Current Month Payroll Cost
 	# Re-use logic from payroll cost analysis if possible, but simpler
 	# Just sum Salary Slip Total Cost for this month
-	current_payroll = frappe.db.get_value("Salary Slip", 
-		{"company": company, "start_date": [">=", month_start], "docstatus": 1},
-		"SUM(gross_pay)"
-	) or 0.0
+	current_payroll_result = frappe.db.sql("""
+		SELECT SUM(gross_pay) as total
+		FROM `tabSalary Slip`
+		WHERE company = %s AND start_date >= %s AND docstatus = 1
+	""", (company, month_start), as_dict=1)
+	current_payroll = flt(current_payroll_result[0].total) if current_payroll_result else 0.0
 	
 	# Estimate Employer Cost (approx 14%) for speed if strict not needed, OR run strict query
 	# Let's run strict query for accuracy
