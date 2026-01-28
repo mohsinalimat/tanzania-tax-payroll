@@ -69,27 +69,116 @@ Tanzanian businesses face unique compliance requirements that generic ERP soluti
 - **PAYE**: Automatic tax application with primary/secondary employment support
 
 ### Reports (20+ Reports)
+
+<div align="center">
+<h2>📊 Report Screenshots</h2>
+</div>
+
+#### PAYE and SDL Report
+Track employee PAYE deductions and SDL contributions with green-highlighted amounts for easy reading.
+
+<div align="center">
+<img src=".github/screenshots/paye-and-sdl-report.png" alt="PAYE and SDL Report" width="90%"/>
+</div>
+
+---
+
+#### VAT eFiling Return
+Generate TRA-ready VAT return reports for seamless e-filing submission.
+
+<div align="center">
+<img src=".github/screenshots/vat-efilling-return-report.png" alt="VAT eFiling Return" width="90%"/>
+</div>
+
+---
+
+#### VAT Output Reconciliation
+Reconcile VAT output between your books and EFD submissions.
+
+<div align="center">
+<img src=".github/screenshots/vat-output-reconciliation-report.png" alt="VAT Output Reconciliation" width="90%"/>
+</div>
+
+---
+
+#### CEO Dashboard
+Executive summary of payroll costs, statutory liabilities, and headcount.
+
+<div align="center">
+<img src=".github/screenshots/ceo-dashboard-report.png" alt="CEO Dashboard" width="90%"/>
+</div>
+
+---
+
+#### NSSF Contribution Report
+Track NSSF contributions for both employees and employer.
+
+<div align="center">
+<img src=".github/screenshots/nssf-contribution-report.png" alt="NSSF Contribution Report" width="90%"/>
+</div>
+
+---
+
+#### WCF Contribution Report
+Workers Compensation Fund contribution tracking.
+
+<div align="center">
+<img src=".github/screenshots/wcf-contribution-report.png" alt="WCF Contribution Report" width="90%"/>
+</div>
+
+---
+
+#### HESLB Return
+Higher Education Students Loans Board deduction report.
+
+<div align="center">
+<img src=".github/screenshots/heslb-return-report.png" alt="HESLB Return" width="90%"/>
+</div>
+
+---
+
+#### Monthly Payroll Summary
+Comprehensive monthly payroll overview.
+
+<div align="center">
+<img src=".github/screenshots/monthly-payroll-summary.png" alt="Monthly Payroll Summary" width="90%"/>
+</div>
+
+---
+
+#### Payroll Cost Analysis
+Detailed analysis of payroll costs including all statutory contributions.
+
+<div align="center">
+<img src=".github/screenshots/payroll-cost-analysis.jpg" alt="Payroll Cost Analysis" width="90%"/>
+</div>
+
+---
+
+<details>
+<summary><b>All Available Reports</b></summary>
+
+**Tax Reports:**
 - VAT Return Report
 - VAT eFiling Return
 - Input VAT Return
 - VAT Output Reconciliation
 - Withholding Tax (ITX 219.03.E)
+
+**Payroll Reports:**
 - PAYE and SDL Report
 - Monthly Payroll Summary
 - NSSF Contribution Report
 - WCF Contribution Report
 - HESLB Return
+- Payroll Cost Analysis
+- CEO Dashboard
+
+**EFD Reports:**
 - EFD Summary
 - EFD Daily Sales
 - EFD Z-Report
-- Payroll Cost Analysis
 
-<details>
-<summary>View Screenshots</summary>
-	<img src=".github/tanzania-hero.png"/>
-	<img src=".github/tanzania-payroll.png"/>
-	<img src=".github/tanzania-reports.png"/>
-	<img src=".github/tanzania-efd.png"/>
 </details>
 
 <div align="center">
