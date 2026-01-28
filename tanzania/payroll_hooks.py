@@ -183,8 +183,6 @@ def split_statutory_lines(doc, salary_slips):
 						"debit": 0,
 						"party_type": "Employee",
 						"party": employee,
-						"reference_type": "Salary Slip",
-						"reference_name": data["salary_slip"],
 						"user_remark": f"{account_base} for {data['employee_name']}",
 						"cost_center": row.cost_center,
 					}
@@ -198,8 +196,6 @@ def split_statutory_lines(doc, salary_slips):
 						"credit": 0,
 						"party_type": "Employee",
 						"party": employee,
-						"reference_type": "Salary Slip",
-						"reference_name": data["salary_slip"],
 						"user_remark": f"{account_base} for {data['employee_name']}",
 						"cost_center": row.cost_center,
 					}
@@ -217,16 +213,26 @@ def split_statutory_lines(doc, salary_slips):
 				doc.append("accounts", acc)
 			else:
 				# It's an existing row object, convert to dict
-				doc.append("accounts", {
+				row_dict = {
 					"account": acc.account,
 					"debit_in_account_currency": acc.debit_in_account_currency,
 					"debit": acc.debit,
 					"credit_in_account_currency": acc.credit_in_account_currency,
 					"credit": acc.credit,
-					"party_type": acc.party_type,
-					"party": acc.party,
-					"reference_type": acc.reference_type if hasattr(acc, 'reference_type') else None,
-					"reference_name": acc.reference_name if hasattr(acc, 'reference_name') else None,
 					"cost_center": acc.cost_center,
-					"user_remark": acc.user_remark if hasattr(acc, 'user_remark') else None,
-				})
+				}
+				# Only include party if set
+				if acc.party_type:
+					row_dict["party_type"] = acc.party_type
+				if acc.party:
+					row_dict["party"] = acc.party
+				# Only include valid reference types
+				if hasattr(acc, 'reference_type') and acc.reference_type in [
+					"Sales Invoice", "Purchase Invoice", "Journal Entry",
+					"Payroll Entry", "Expense Claim", "Employee Advance"
+				]:
+					row_dict["reference_type"] = acc.reference_type
+					row_dict["reference_name"] = acc.reference_name
+				if hasattr(acc, 'user_remark') and acc.user_remark:
+					row_dict["user_remark"] = acc.user_remark
+				doc.append("accounts", row_dict)

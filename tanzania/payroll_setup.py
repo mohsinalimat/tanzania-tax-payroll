@@ -73,8 +73,8 @@ def create_payroll_expense_accounts(company_name, company_abbr):
 		account_name = account_data["account_name"]
 		account_name_with_abbr = f"{account_name} - {company_abbr}"
 
-		# Check if account already exists
-		if frappe.db.exists("Account", {"account_name": account_name_with_abbr, "company": company_name}):
+		# Check if account already exists (by document name which includes abbr)
+		if frappe.db.exists("Account", account_name_with_abbr):
 			continue
 
 		# Get parent account
@@ -123,8 +123,8 @@ def create_payroll_asset_accounts(company_name, company_abbr):
 		account_name = account_data["account_name"]
 		account_name_with_abbr = f"{account_name} - {company_abbr}"
 
-		# Check if account already exists
-		if frappe.db.exists("Account", {"account_name": account_name_with_abbr, "company": company_name}):
+		# Check if account already exists (by document name which includes abbr)
+		if frappe.db.exists("Account", account_name_with_abbr):
 			continue
 
 		# Get parent account
@@ -171,8 +171,8 @@ def create_payroll_liability_accounts(company_name, company_abbr):
 		account_name = account_data["account_name"]
 		account_name_with_abbr = f"{account_name} - {company_abbr}"
 
-		# Check if account already exists
-		if frappe.db.exists("Account", {"account_name": account_name_with_abbr, "company": company_name}):
+		# Check if account already exists (by document name which includes abbr)
+		if frappe.db.exists("Account", account_name_with_abbr):
 			continue
 
 		# Get parent account
@@ -201,12 +201,12 @@ def ensure_salaries_wages_group(company_name, company_abbr):
 	group_name = "Salaries and Wages Accounts"
 	group_name_with_abbr = f"{group_name} - {company_abbr}"
 
-	if not frappe.db.exists("Account", {"account_name": group_name_with_abbr, "company": company_name}):
+	if not frappe.db.exists("Account", group_name_with_abbr):
 		# Must be under Indirect Expenses
 		indirect_expenses = f"Indirect Expenses - {company_abbr}"
 
 		# Ensure Indirect Expenses exists first
-		if not frappe.db.exists("Account", {"account_name": indirect_expenses, "company": company_name}):
+		if not frappe.db.exists("Account", indirect_expenses):
 			expense_root = get_root_account(company_name, "Expense")
 			frappe.get_doc({
 				"doctype": "Account",
@@ -236,12 +236,12 @@ def ensure_salaries_payable_group(company_name, company_abbr):
 	group_name = "Salaries and Wages Payable"
 	group_name_with_abbr = f"{group_name} - {company_abbr}"
 
-	if not frappe.db.exists("Account", {"account_name": group_name_with_abbr, "company": company_name}):
+	if not frappe.db.exists("Account", group_name_with_abbr):
 		# Must be under Current Liabilities
 		current_liabilities = f"Current Liabilities - {company_abbr}"
 
 		# Ensure Current Liabilities exists first
-		if not frappe.db.exists("Account", {"account_name": current_liabilities, "company": company_name}):
+		if not frappe.db.exists("Account", current_liabilities):
 			liability_root = get_root_account(company_name, "Liability")
 			frappe.get_doc({
 				"doctype": "Account",
@@ -269,12 +269,12 @@ def ensure_loans_advances_group(company_name, company_abbr):
 	group_name = "Loans and Advances"
 	group_name_with_abbr = f"{group_name} - {company_abbr}"
 
-	if not frappe.db.exists("Account", {"account_name": group_name_with_abbr, "company": company_name}):
+	if not frappe.db.exists("Account", group_name_with_abbr):
 		# Must be under Current Assets
 		current_assets = f"Current Assets - {company_abbr}"
 
 		# Ensure Current Assets exists first
-		if not frappe.db.exists("Account", {"account_name": current_assets, "company": company_name}):
+		if not frappe.db.exists("Account", current_assets):
 			asset_root = get_root_account(company_name, "Asset")
 			frappe.get_doc({
 				"doctype": "Account",
