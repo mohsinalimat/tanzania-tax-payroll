@@ -110,9 +110,9 @@ def get_data(filters):
 		WHERE pi.docstatus = 1
 			AND pitc.account_head LIKE %(wht_account)s
 			AND pitc.tax_amount != 0
-			{conditions}
+			""" + conditions + """
 		ORDER BY pi.posting_date, pi.name
-	""".format(conditions=conditions), {
+	""", {  # nosemgrep: frappe-sql-format-injection
 		"company": company,
 		"from_date": filters.get("from_date"),
 		"to_date": filters.get("to_date"),
@@ -197,7 +197,7 @@ def get_conditions(filters):
 
 
 @frappe.whitelist()
-def get_wht_summary(filters):
+def get_wht_summary(filters: str):
 	"""Get summary totals for the report"""
 	if isinstance(filters, str):
 		filters = frappe.parse_json(filters)

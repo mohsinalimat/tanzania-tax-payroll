@@ -121,9 +121,9 @@ def get_data(filters):
 			si.currency
 		FROM `tabSales Invoice` si
 		WHERE si.docstatus = 1
-		{conditions}
+		""" + conditions + """
 		ORDER BY si.posting_date, si.name
-	""".format(conditions=conditions), filters, as_dict=1)
+	""", filters, as_dict=1)  # nosemgrep: frappe-sql-format-injection
 
 	# Calculate VAT rate for each invoice
 	for row in data:

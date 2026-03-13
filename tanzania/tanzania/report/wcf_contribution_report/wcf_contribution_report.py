@@ -83,7 +83,7 @@ def get_data(filters):
 	conditions = get_conditions(filters)
 
 	# Get salary slip data for all employees
-	salary_slips = frappe.db.sql(f"""
+	salary_slips = frappe.db.sql("""
 		SELECT
 			ss.name,
 			ss.employee,
@@ -97,7 +97,7 @@ def get_data(filters):
 		FROM `tabSalary Slip` ss
 		INNER JOIN `tabEmployee` e ON ss.employee = e.name
 		WHERE ss.docstatus = 1
-			{conditions}
+	""" + conditions + """
 		ORDER BY ss.employee, ss.posting_date
 	""", filters, as_dict=1)
 

@@ -185,8 +185,8 @@ def get_report_summary(data):
 		return []
 
 	return [
-		{"value": data[0]["value"], "label": "Headcount", "datatype": "Int", "indicator": "blue"},
-		{"value": data[1]["value"], "label": "Gross Payroll", "datatype": "Currency", "indicator": "green"},
-		{"value": data[7]["value"], "label": "Total Statutory", "datatype": "Currency", "indicator": "red"},
-		{"value": data[8]["value"], "label": "Net Pay", "datatype": "Currency", "indicator": "green"},
+		{"value": data[0]["value"], "label": _("Headcount"), "datatype": "Int", "indicator": "blue"},
+		{"value": data[1]["value"], "label": _("Gross Payroll"), "datatype": "Currency", "indicator": "green"},
+		{"value": data[7]["value"], "label": _("Total Statutory"), "datatype": "Currency", "indicator": "red"},
+		{"value": data[8]["value"], "label": _("Net Pay"), "datatype": "Currency", "indicator": "green"},
 	]

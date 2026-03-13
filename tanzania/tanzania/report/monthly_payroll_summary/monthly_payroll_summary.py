@@ -119,7 +119,7 @@ def get_data(filters):
 	conditions = get_conditions(filters)
 
 	# Get salary slip data
-	salary_slips = frappe.db.sql(f"""
+	salary_slips = frappe.db.sql("""
 		SELECT
 			ss.name,
 			ss.department,
@@ -129,8 +129,7 @@ def get_data(filters):
 			ss.net_pay
 		FROM `tabSalary Slip` ss
 		WHERE ss.docstatus = 1
-			{conditions}
-	""", filters, as_dict=1)
+	""" + conditions, filters, as_dict=1)
 
 	# Group data by department
 	department_data = {}

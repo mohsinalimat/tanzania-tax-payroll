@@ -286,7 +286,7 @@ def get_zero_rated_purchases(company, from_date, to_date):
 
 
 @frappe.whitelist()
-def get_vat_summary(filters):
+def get_vat_summary(filters: str):
 	"""Get VAT summary for the period"""
 	if isinstance(filters, str):
 		filters = frappe.parse_json(filters)

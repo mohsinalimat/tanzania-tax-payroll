@@ -61,7 +61,7 @@ def setup_tanzania_taxes():
 		# Create Tax Withholding Categories (ERPNext native WHT)
 		create_tax_withholding_categories(company_name, company_abbr)
 
-	frappe.db.commit()
+	frappe.db.commit()  # nosemgrep: frappe-manual-commit - required after bulk setup operations during install
 	frappe.msgprint(_("Tanzania tax setup completed successfully"))
 
 
@@ -84,7 +84,7 @@ def setup_tanzania_payroll_system():
 		# Setup payroll (accounts, components, structure)
 		setup_tanzania_payroll(company_name, company_abbr)
 
-	frappe.db.commit()
+	frappe.db.commit()  # nosemgrep: frappe-manual-commit - required after bulk setup operations during install
 	frappe.msgprint(_("Tanzania payroll setup completed successfully"))
 
 
@@ -122,7 +122,7 @@ def rename_default_templates(company_name, company_abbr, template_type="Sales"):
 	if frappe.db.exists(doctype, old_name):
 		try:
 			frappe.delete_doc(doctype, old_name, force=True, ignore_permissions=True)
-			frappe.db.commit()
+			frappe.db.commit()  # nosemgrep: frappe-manual-commit - commit needed after force delete during install
 			print(f"✅ Deleted old template: '{old_name}'")
 		except Exception as e:
 			frappe.log_error(f"Error deleting template {old_name}: {str(e)}", "Tanzania Template Delete")
@@ -136,10 +136,7 @@ def update_existing_template(doctype, template_name, template_config, cost_cente
 
 		# Remove all existing tax rows using SQL for reliability
 		child_table = "Sales Taxes and Charges" if "Sales" in doctype else "Purchase Taxes and Charges"
-		frappe.db.sql("""
-			DELETE FROM `tab{child_table}`
-			WHERE parent = %s AND parenttype = %s
-		""".format(child_table=child_table), (template_name, doctype))
+		frappe.db.delete(child_table, {"parent": template_name, "parenttype": doctype})
 
 		# Reload doc after SQL delete
 		template_doc.reload()

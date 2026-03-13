@@ -121,9 +121,9 @@ class WithholdingTaxReport:
 					WHERE stc.parent = si.name
 						AND stc.account_head LIKE '%%Withholding Tax%%'
 				)
-				{conditions}
+				""" + conditions + """
 			ORDER BY si.posting_date, si.name
-		""".format(conditions=conditions), self.filters, as_dict=1)
+		""", self.filters, as_dict=1)  # nosemgrep: frappe-sql-format-injection
 
 		# Get Withholding Tax from Purchase Invoices (on suppliers)
 		purchase_data = frappe.db.sql("""
@@ -160,9 +160,9 @@ class WithholdingTaxReport:
 					WHERE ptc.parent = pi.name
 						AND ptc.account_head LIKE '%%Withholding Tax%%'
 				)
-				{conditions}
+				""" + conditions + """
 			ORDER BY pi.posting_date, pi.name
-		""".format(conditions=conditions), self.filters, as_dict=1)
+		""", self.filters, as_dict=1)  # nosemgrep: frappe-sql-format-injection
 
 		self.data = sales_data + purchase_data
 

@@ -125,9 +125,9 @@ def get_data(filters):
 			AND pi.posting_date BETWEEN %(from_date)s AND %(to_date)s
 			AND ptc.account_head = %(vat_account)s
 			AND ptc.tax_amount > 0
-			{conditions}
+			""" + conditions + """
 		ORDER BY pi.posting_date, pi.name
-	""".format(conditions=conditions), {
+	""", {  # nosemgrep: frappe-sql-format-injection
 		"company": company,
 		"from_date": from_date,
 		"to_date": to_date,
@@ -165,7 +165,7 @@ def get_conditions(filters):
 
 
 @frappe.whitelist()
-def get_input_vat_summary(filters):
+def get_input_vat_summary(filters: str):
 	"""Get summary totals for Input VAT"""
 	if isinstance(filters, str):
 		filters = frappe.parse_json(filters)

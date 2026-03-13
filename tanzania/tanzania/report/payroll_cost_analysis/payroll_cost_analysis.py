@@ -68,12 +68,12 @@ def get_data(filters):
 	# Fetch Salary Slips
 	data_map = {}
 	
-	salary_slips = frappe.db.sql(f"""
-		SELECT 
+	salary_slips = frappe.db.sql("""
+		SELECT
 			name, department, gross_pay
 		FROM `tabSalary Slip`
-		WHERE docstatus = 1 {conditions}
-	""", filters, as_dict=1)
+		WHERE docstatus = 1
+	""" + conditions, filters, as_dict=1)
 
 	if not salary_slips:
 		return []

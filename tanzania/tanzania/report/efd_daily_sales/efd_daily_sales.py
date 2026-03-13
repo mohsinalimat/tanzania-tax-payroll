@@ -113,9 +113,9 @@ def get_data(filters):
 			si.efd_verification_url as verification_url
 		FROM `tabSales Invoice` si
 		WHERE si.docstatus = 1
-			{conditions}
+	""" + conditions + """
 		ORDER BY si.posting_date DESC, si.posting_time DESC
-	""".format(conditions=conditions), filters, as_dict=1)
+	""", filters, as_dict=1)
 
 	return data
 

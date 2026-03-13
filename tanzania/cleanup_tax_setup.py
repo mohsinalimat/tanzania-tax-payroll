@@ -27,7 +27,7 @@ def cleanup_all():
 		# Delete old "Tanzania Tax" or "VAT" accounts if they exist
 		cleanup_old_accounts(company_abbr)
 
-	frappe.db.commit()
+	frappe.db.commit()  # nosemgrep: frappe-manual-commit - commit needed after bulk cleanup operations
 	print("\n✅ Cleanup completed successfully!")
 
 

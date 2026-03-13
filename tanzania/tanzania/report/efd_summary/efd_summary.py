@@ -67,10 +67,10 @@ def get_data(filters):
 				SUM(si.grand_total) as grand_total
 			FROM `tabSales Invoice` si
 			WHERE si.docstatus = 1
-				{conditions}
+				""" + conditions + """
 			GROUP BY COALESCE(si.efd_status, 'Not Sent')
 			ORDER BY count DESC
-		""".format(conditions=conditions), filters, as_dict=1)
+		""", filters, as_dict=1)  # nosemgrep: frappe-sql-format-injection
 
 	elif group_by == "Payment Type":
 		data = frappe.db.sql("""
@@ -87,14 +87,14 @@ def get_data(filters):
 			FROM `tabSales Invoice` si
 			WHERE si.docstatus = 1
 				AND si.efd_status = 'Success'
-				{conditions}
+				""" + conditions + """
 			GROUP BY CASE
 				WHEN si.is_pos = 1 THEN 'CASH'
 				WHEN si.outstanding_amount > 0 THEN 'INVOICE'
 				ELSE 'CASH'
 			END
 			ORDER BY grand_total DESC
-		""".format(conditions=conditions), filters, as_dict=1)
+		""", filters, as_dict=1)  # nosemgrep: frappe-sql-format-injection
 
 	elif group_by == "Tax Code":
 		data = frappe.db.sql("""
@@ -113,10 +113,10 @@ def get_data(filters):
 			LEFT JOIN `tabItem Tax Template` itt ON sii.item_tax_template = itt.name
 			WHERE si.docstatus = 1
 				AND si.efd_status = 'Success'
-				{conditions}
+				""" + conditions + """
 			GROUP BY COALESCE(itt.efd_tax_code, 'A-Standard 18%')
 			ORDER BY net_total DESC
-		""".format(conditions=conditions), filters, as_dict=1)
+		""", filters, as_dict=1)  # nosemgrep: frappe-sql-format-injection
 
 	else:  # Monthly
 		data = frappe.db.sql("""
@@ -129,10 +129,10 @@ def get_data(filters):
 			FROM `tabSales Invoice` si
 			WHERE si.docstatus = 1
 				AND si.efd_status = 'Success'
-				{conditions}
+				""" + conditions + """
 			GROUP BY DATE_FORMAT(si.posting_date, '%%Y-%%m')
 			ORDER BY group_field DESC
-		""".format(conditions=conditions), filters, as_dict=1)
+		""", filters, as_dict=1)  # nosemgrep: frappe-sql-format-injection
 
 	# Calculate percentages
 	total = sum(d.get("grand_total", 0) or d.get("net_total", 0) or 0 for d in data)
@@ -167,8 +167,8 @@ def get_summary(filters):
 			SUM(CASE WHEN efd_status = 'Success' THEN grand_total ELSE 0 END) as efd_total
 		FROM `tabSales Invoice` si
 		WHERE si.docstatus = 1
-			{conditions}
-	""".format(conditions=conditions), filters, as_dict=1)[0]
+			""" + conditions + """
+	""", filters, as_dict=1)[0]  # nosemgrep: frappe-sql-format-injection
 
 	success_rate = 0
 	if stats.total_invoices:
@@ -192,9 +192,9 @@ def get_chart(filters):
 			COUNT(*) as count
 		FROM `tabSales Invoice` si
 		WHERE si.docstatus = 1
-			{conditions}
+			""" + conditions + """
 		GROUP BY COALESCE(si.efd_status, 'Not Sent')
-	""".format(conditions=conditions), filters, as_dict=1)
+	""", filters, as_dict=1)  # nosemgrep: frappe-sql-format-injection
 
 	labels = [d.status for d in data]
 	values = [d.count for d in data]

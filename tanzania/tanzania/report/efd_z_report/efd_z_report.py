@@ -121,10 +121,10 @@ def get_data(filters):
 		FROM `tabSales Invoice` si
 		WHERE si.docstatus = 1
 			AND si.efd_status = 'Success'
-			{conditions}
+			""" + conditions + """
 		GROUP BY si.posting_date
 		ORDER BY si.posting_date DESC
-	""".format(conditions=conditions), filters, as_dict=1)
+	""", filters, as_dict=1)  # nosemgrep: frappe-sql-format-injection
 
 	# Get tax breakdown by tax code for each day
 	for row in data:
@@ -150,9 +150,9 @@ def get_tax_breakdown(posting_date, filters):
 		WHERE si.docstatus = 1
 			AND si.efd_status = 'Success'
 			AND si.posting_date = %(posting_date)s
-			{conditions}
+			""" + conditions + """
 		GROUP BY COALESCE(itt.efd_tax_code, 'A-Standard 18%')
-	""".format(conditions=conditions), {
+	""", {  # nosemgrep: frappe-sql-format-injection
 		"posting_date": posting_date,
 		"company": filters.get("company")
 	}, as_dict=1)

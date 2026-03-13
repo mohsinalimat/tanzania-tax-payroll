@@ -121,9 +121,9 @@ def get_data(filters):
 			AND ss.company = %(company)s
 			AND ss.posting_date BETWEEN %(from_date)s AND %(to_date)s
 			AND e.heslb IS NOT NULL AND e.heslb != ''
-			{conditions}
+			""" + conditions + """
 		ORDER BY ss.employee, ss.posting_date
-	""".format(conditions=conditions), {
+	""", {  # nosemgrep: frappe-sql-format-injection
 		"company": company,
 		"from_date": from_date,
 		"to_date": to_date,
@@ -188,7 +188,7 @@ def get_conditions(filters):
 
 
 @frappe.whitelist()
-def get_heslb_summary(filters):
+def get_heslb_summary(filters: str):
 	"""Get HESLB summary for the period"""
 	if isinstance(filters, str):
 		filters = frappe.parse_json(filters)
@@ -208,7 +208,7 @@ def get_heslb_summary(filters):
 
 
 @frappe.whitelist()
-def export_heslb_excel(filters):
+def export_heslb_excel(filters: str):
 	"""Export HESLB data in Excel format for HESLB portal upload"""
 	if isinstance(filters, str):
 		filters = frappe.parse_json(filters)

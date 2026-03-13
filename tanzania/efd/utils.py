@@ -9,7 +9,7 @@ import json
 
 
 @frappe.whitelist()
-def submit_efd_receipt(invoice_name, preview=False):
+def submit_efd_receipt(invoice_name: str, preview: bool = False):
 	"""Submit Sales Invoice to EFD
 
 	Args:
@@ -90,7 +90,7 @@ def submit_efd_receipt(invoice_name, preview=False):
 			"efd_time": data.get("time"),
 		}, update_modified=False)
 
-		frappe.db.commit()
+		frappe.db.commit()  # nosemgrep: frappe-manual-commit - commit needed to persist EFD receipt data from external API
 
 		return {
 			"success": True,
@@ -102,7 +102,7 @@ def submit_efd_receipt(invoice_name, preview=False):
 
 		# Update invoice status
 		frappe.db.set_value("Sales Invoice", invoice_name, "efd_status", "Failed", update_modified=False)
-		frappe.db.commit()
+		frappe.db.commit()  # nosemgrep: frappe-manual-commit - commit needed to persist EFD failure status
 
 		return {
 			"success": False,
